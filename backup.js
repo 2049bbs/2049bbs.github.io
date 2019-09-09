@@ -1,7 +1,7 @@
 // @ts-check
 
 const youbbsBackupHelper = require("youbbs-backup-helper")
-const { move, readdir, ensureDir } = require("fs-extra")
+const { move, readdir, ensureDir, unlink, existsSync } = require("fs-extra")
 const path = require("path")
 
 /** @typedef {import("youbbs-backup-helper/src/types").Article} Article */
@@ -110,7 +110,23 @@ userBackupHelper.pipe(
         return obj
     }
 )
+userBackupHelper.setFileNameFn(
+    /**
+     * @param {User} obj
+     */
+    (obj, id, fileExt) => {
+        if (obj.url.length < 100) {
+            return ".fail"
+        } else {
+            return `${id}.${fileExt}`
+        }
+    }
+)
 userBackupHelper.start().then(() => {
+    const failFile = `${outputDir}/user/.fail`
+    if (existsSync(failFile)) {
+        unlink(failFile)
+    }
     return moveR(`${outputDir}/user`, "_users")
 })
 
