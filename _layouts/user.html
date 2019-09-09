@@ -1,0 +1,84 @@
+---
+layout: default
+---
+
+{% include get_baseurl.html %}
+
+{% assign user_articles = "" | split: "," %}
+
+{% for article in site.posts %}
+    {% if article.authorID == page.userID %}
+        {% assign user_articles = user_articles | push: article %}
+    {% endif %}
+{% endfor %}
+
+<div class="nav-title">
+    <a href="{{ baseURL }}/">{{ site.name }}</a> » 会员：{{ page.userName }}
+</div>
+
+<div class="main-box">
+
+    <div class="member-avatar">
+        <img src="{{ page.avatar }}" alt="{{ page.userName }}">
+    </div>
+
+    <div class="member-detail">
+        <p>
+            会员：<strong>{{ page.userName }}</strong> (第{{ page.userID }}号会员，{{ page.regTime | date: "%Y-%m-%d %H:%M" }}加入)
+        </p>
+
+        <p>主贴： {{ user_articles | size }}</p>
+
+        <p>
+            网站： <a href="{{ page.userURL }}" target="_blank" rel="nofollow">{{ page.url }}</a>
+        </p>
+
+        <p>关于： <br> {{ content }}</p>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="nav-title">
+    {{ page.userName }} <a>最近发表的帖子</a>
+</div>
+
+<div class="main-box home-box-list">
+    {% for article in user_articles limit: 10 %}
+    <div class="post-list">
+
+        <div class="item-avatar">
+            <a href="{{ baseURL }}/member/{{ page.userID }}">
+                <img src="{{ page.avatar }}" alt="{{ page.userName }}">
+            </a>
+        </div>
+
+        <div class="item-content">
+            <h1>
+                <a href="{{ baseURL }}/t/{{ article.aid }}">{{ article.title }}</a>
+            </h1>
+
+            {% for category in site.category_info %}
+                {% if category.name == article.categories[0] %}
+                    {% assign cid = category.cid %}
+                    {% assign cName = category.name %}
+                {% endif %}
+            {% endfor %}
+            
+            <span class="item-date">
+                <a href="{{ baseURL }}/n/{{ cid }}">{{ cName }}</a> • <a href="{{ baseURL }}/member/{{ page.userID }}">{{ page.userName }}</a>
+                • 2019-08-31 10:55
+            </span>
+        </div>
+
+        <div class="item-count">
+            <a href="{{ baseURL }}/t/{{ article.aid }}#reply{{ article.comments | size }}">
+                {{ article.comments | size }}
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+    {% endfor %}
+
+</div>

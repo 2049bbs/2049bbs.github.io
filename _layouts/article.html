@@ -1,0 +1,100 @@
+---
+layout: default
+---
+
+{% include get_baseurl.html %}
+
+{% include category_info.html %}
+
+{% include article_author_info.html %}
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href="{{ baseURL }}/">{{ site.name }}</a> » <a href="{{ baseURL }}/n/{{ cid }}">{{ categoryName }}</a> ({{ categorySize }})
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>{{ page.title }}</h1>
+
+            <div class="topic-title-date">
+                By <a href="{{ baseURL }}/member/{{ page.authorID }}">{{ article_author_info.userName }}</a>
+                at {{ page.date | date: "%Y-%m-%d %H:%M" }}
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href="{{ baseURL }}/member/{{ page.authorID }}">
+                <img src="{{ article_author_info.avatar }}" alt="{{ article_author_info.userName }}">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        {{ content }}
+
+        <p class="mytag float-left">
+            {% for tag in page.tags %}
+            <a href="{{ baseURL }}/tag/{{ tag }}">{{ tag }}</a>{% if forloop.last != true %}, {% endif %}
+            {% endfor %}
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 {{ page.comments | size }} 条回复
+</div>
+
+<div class="main-box home-box-list">
+    {% for comment in page.comments %}
+        <a name="{{ forloop.index }}"></a>
+        
+        {% for user in site.users %}
+            {% if user.userID == comment.authorID %}
+                {% assign comment_author_info = user %}
+            {% endif %}
+        {% endfor %}
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href="{{ baseURL }}/member/{{ comment.authorID }}">
+                    <img src="{{ comment_author_info.avatar }}" alt="{{ comment_author_info.userName }}">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    {{ comment.content | markdownify }}
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href="{{ baseURL }}/member/{{ comment.authorID }}">{{ comment_author_info.userName }}</a>
+                        at {{ comment.addTime | date: "%Y-%m-%d %H:%M" }}
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">{{ forloop.index }}</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    {% endfor %}
+</div>

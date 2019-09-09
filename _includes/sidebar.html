@@ -1,0 +1,33 @@
+<div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">热门主题</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                {% assign hot_categories = site.category_info | sample: 20 %}
+                {% for category in hot_categories %}
+                <a href="{{ baseURL }}/n/{{ category.cid }}">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">新增主题</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                {% for category in site.category_info limit: 20 %}
+                <a href="{{ baseURL }}/n/{{ category.cid }}">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>

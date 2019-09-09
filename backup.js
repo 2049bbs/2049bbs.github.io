@@ -1,11 +1,12 @@
 // @ts-check
 
 const youbbsBackupHelper = require("youbbs-backup-helper")
-const { readJSON, move, readdir } = require("fs-extra")
+const { move, readdir, ensureDir } = require("fs-extra")
 const path = require("path")
 
 /** @typedef {import("youbbs-backup-helper/src/types").Article} Article */
 /** @typedef {import("youbbs-backup-helper/src/types").Category} Category */
+/** @typedef {import("youbbs-backup-helper/src/types").User} User */
 
 const baseURL = "https://2049bbs.xyz"
 const outputDir = "tmp"
@@ -17,19 +18,33 @@ const outputDir = "tmp"
 const moveR = async (src, dest) => {
     const files = await readdir(src)
     await Promise.all(
-        files.map((f) => {
-            move(path.join(src, f), path.join(dest, f), { overwrite: true })
+        files.map(async (f) => {
+            await ensureDir(path.dirname(path.join(dest, f)))
+            await move(path.join(src, f), path.join(dest, f), { overwrite: true })
         })
     )
 }
 
-new youbbsBackupHelper({
+const categoryBackupHelper = new youbbsBackupHelper({
     baseURL,
     outputDir,
     types: ["category"],
-    serializer: "json",
+    serializer: "markdown",
     maxConcurrent: 10,
-}).start().then(() => {
+})
+
+/** @type {Map<number, Category>} */
+const categories = new Map()
+
+categoryBackupHelper.pipe(
+    /** @param {Category} obj */
+    (obj) => {
+        categories.set(obj.cid, obj)
+        return obj
+    }
+)
+
+categoryBackupHelper.start().then(() => {
 
     const helper = new youbbsBackupHelper({
         baseURL,
@@ -59,10 +74,11 @@ new youbbsBackupHelper({
             obj["date"] = time
 
             const { cid } = obj
-            /** @type {Category} */
-            const cJson = await readJSON(`${outputDir}/category/${cid}.json`)
+            const cJson = categories.get(cid)
             const category = cJson.name
             obj["category"] = category
+
+            obj.content = obj.content.replace(/{/g, "\\{").replace(/\}/g, "\\}")
 
             return obj
         }
@@ -72,16 +88,29 @@ new youbbsBackupHelper({
 
 }).then(async () => {
     await moveR(`${outputDir}/article`, "_posts")
-    await moveR(`${outputDir}/category`, "categories")
+    await moveR(`${outputDir}/category`, "_category_info")
 })
 
-new youbbsBackupHelper({
+const userBackupHelper = new youbbsBackupHelper({
     baseURL,
     outputDir,
     types: ["user"],
     serializer: "markdown",
     maxConcurrent: 20,
-}).start().then(() => {
-    return moveR(`${outputDir}/user`, "users")
+})
+userBackupHelper.pipe(
+    /**
+     * @param {User} obj
+     */
+    async (obj) => {
+        const url = obj.url
+        delete obj.url
+        obj["userURL"] = url
+
+        return obj
+    }
+)
+userBackupHelper.start().then(() => {
+    return moveR(`${outputDir}/user`, "_users")
 })
 

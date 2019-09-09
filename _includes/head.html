@@ -1,0 +1,42 @@
+<head>
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{% if page.categories[0] %}{{ page.categories[0] }} - {% endif %}{{ site.name }}</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href="{{ baseURL }}/static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}" />
+
+  <link href="{{ baseURL }}/feed" rel="alternate" title="{{ site.name }} - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href="{{ baseURL }}/static/default/style.css">
+  <link rel="stylesheet" href="{{ baseURL }}/static/css/jquery.toast.css">
+  <link rel="stylesheet" href="{{ baseURL }}/static/css/uploadifive.css">
+  <link rel="stylesheet" href="{{ baseURL }}/static/highligt/sunburst.min.css">
+
+  <script src="{{ baseURL }}/static/js/jquery.min.js"></script>
+  <script src="{{ baseURL }}/static/js/jquery.toast.js"></script>
+  <script src="{{ baseURL }}/static/js/md5.min.js"></script>
+  <script src="{{ baseURL }}/static/js/jquery.uploadifive.min.js"></script>
+  <script src="{{ baseURL }}/static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
