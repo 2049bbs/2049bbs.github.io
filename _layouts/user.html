@@ -30,7 +30,7 @@ layout: default
         <p>主贴： {{ user_articles | size }}</p>
 
         <p>
-            网站： <a href="{{ page.userURL }}" target="_blank" rel="nofollow">{{ page.url }}</a>
+            网站： <a href="{{ page.userURL }}" target="_blank" rel="nofollow">{{ page.userURL }}</a>
         </p>
 
         <p>关于： <br> {{ content }}</p>
@@ -45,40 +45,7 @@ layout: default
 
 <div class="main-box home-box-list">
     {% for article in user_articles limit: 10 %}
-    <div class="post-list">
-
-        <div class="item-avatar">
-            <a href="{{ baseURL }}/member/{{ page.userID }}">
-                <img src="{{ page.avatar }}" alt="{{ page.userName }}">
-            </a>
-        </div>
-
-        <div class="item-content">
-            <h1>
-                <a href="{{ baseURL }}/t/{{ article.aid }}">{{ article.title }}</a>
-            </h1>
-
-            {% for category in site.category_info %}
-                {% if category.name == article.categories[0] %}
-                    {% assign cid = category.cid %}
-                    {% assign cName = category.name %}
-                {% endif %}
-            {% endfor %}
-            
-            <span class="item-date">
-                <a href="{{ baseURL }}/n/{{ cid }}">{{ cName }}</a> • <a href="{{ baseURL }}/member/{{ page.userID }}">{{ page.userName }}</a>
-                • 2019-08-31 10:55
-            </span>
-        </div>
-
-        <div class="item-count">
-            <a href="{{ baseURL }}/t/{{ article.aid }}#reply{{ article.comments | size }}">
-                {{ article.comments | size }}
-            </a>
-        </div>
-
-        <div class="c"></div>
-    </div>
+        {% include article_list_item.html %}
     {% endfor %}
 
 </div>

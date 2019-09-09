@@ -1,0 +1,43 @@
+<div class="post-list">
+
+    {% for user in site.users %}
+        {% if user.userID == article.authorID %}
+            {% assign _post_author_info = user %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="item-avatar">
+        <a href="{{ baseURL }}/member/{{ article.authorID }}">
+            <img src="{{ _post_author_info.avatar }}" alt="{{ _post_author_info.userName }}">
+        </a>
+    </div>
+
+    <div class="item-content">
+        <h1>
+            <a href="{{ baseURL }}/t/{{ article.aid }}">{{ article.title }}</a>
+        </h1>
+
+        {% for category in site.category_info %}
+            {% if category.name == article.categories[0] %}
+                {% assign cid = category.cid %}
+                {% assign cName = category.name %}
+            {% endif %}
+        {% endfor %}
+        
+        <span class="item-date">
+            <a href="{{ baseURL }}/n/{{ cid }}">{{ cName }}</a> • <a href="{{ baseURL }}/member/{{ article.authorID }}">{{ _post_author_info.userName }}</a>
+            • {{ article.date | date: "%Y-%m-%d %H:%M" }}
+        </span>
+    </div>
+
+    {% assign _post_comment_size = article.comments | size %}
+    {% if _post_comment_size > 0 %}
+    <div class="item-count">
+        <a href="{{ baseURL }}/t/{{ article.aid }}#reply{{ article.comments | size }}">
+            {{ _post_comment_size }}
+        </a>
+    </div>
+    {% endif %}
+
+    <div class="c"></div>
+</div>

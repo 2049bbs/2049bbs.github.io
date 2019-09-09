@@ -1,0 +1,40 @@
+---
+layout: default
+---
+
+{% include get_baseurl.html %}
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href="{{ baseURL }}/">{{ site.name }}</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+
+<div class="main-box home-box-list">
+    
+    {% for article in paginator.posts %}
+        {% include article_list_item.html %}
+    {% endfor %}
+
+    <div class="pagination">
+
+        {% if paginator.previous_page %}
+        <a href="{{ baseURL }}{{ paginator.previous_page_path }}" class="float-left">
+            « 上一页
+        </a>
+        {% endif %}
+
+        {% if paginator.next_page %}
+        <a href="{{ baseURL }}{{ paginator.next_page_path }}" class="float-right">
+            下一页 »
+        </a>
+        {% endif %}
+        
+        <div class="c"></div>
+
+    </div>
+
+</div>

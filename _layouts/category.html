@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+{% include get_baseurl.html %}
+
+{% for category in site.categories %}
+    {% if category[0] == page.name %}
+        {% assign categoryArticles = category[1] %}
+    {% endif %}
+{% endfor %}
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href="{{ baseURL }}/">{{ site.name }}</a> » {{ page.name }} ({{ categoryArticles | size }})
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box home-box-list">
+
+    {% assign category_desc = page.excerpt | strip %}
+
+    {% if category_desc %}
+    <div class="post-list grey">
+        {{ category_desc }}
+    </div>
+    {% endif %}
+
+    {% for article in categoryArticles limit: 20 %}
+        {% include article_list_item.html %}
+    {% endfor %}
+    
+</div>
