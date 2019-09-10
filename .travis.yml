@@ -21,9 +21,14 @@ before_install:
   - ssh-add $HOME/.ssh/id_rsa
   - git config --global user.email bot@example.com
   - git config --global user.name bot
+  - git remote set-url origin git@github.com:2049bbs/2049bbs.github.io.git
 
 install:
   - npm install
+
+before_script:
+  - git fetch
+  - git checkout -f master
 
 script:
   - npm run backup
