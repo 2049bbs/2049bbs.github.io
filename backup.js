@@ -78,7 +78,7 @@ categoryBackupHelper.start().then(() => {
             const category = cJson.name
             obj["category"] = category
 
-            obj.content = obj.content.replace(/{/g, "\\{").replace(/\}/g, "\\}")
+            obj.content = obj.content.replace(/{{/g, "{ {").replace(/}}/g, "} }")  // add U+200A HAIR SPACE
 
             return obj
         }
