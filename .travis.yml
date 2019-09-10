@@ -1,0 +1,33 @@
+language: node_js
+
+node_js:
+  - "12"
+
+git:
+  depth: 1
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - node_modules
+
+before_install:
+  - eval "$(ssh-agent -s)"
+  - openssl aes-256-cbc -k "$ssh_key_decrypt_password" -in id_rsa.enc -out $HOME/.ssh/id_rsa -d
+  - chmod 600 $HOME/.ssh/id_rsa
+  - ssh-add $HOME/.ssh/id_rsa
+  - git config --global user.email bot@example.com
+  - git config --global user.name bot
+
+install:
+  - npm install
+
+script:
+  - npm run backup
+  - git pull
+  - git add .
+  - git commit -m "$(date --iso-8601)"
+  - git push
