@@ -115,7 +115,7 @@ userBackupHelper.setFileNameFn(
      * @param {User} obj
      */
     (obj, id, fileExt) => {
-        if (obj.avatar.length < 100) {
+        if (obj.avatar.length < 100 || !obj.avatar.startsWith("data:image/")) {
             return ".fail"
         } else {
             return `${id}.${fileExt}`
