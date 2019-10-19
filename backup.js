@@ -69,9 +69,12 @@ categoryBackupHelper.start().then(() => {
          * @param {Article} obj
          */
         async (obj) => {
-            const time = obj.addTime
-            delete obj.addTime
-            obj["date"] = time
+            // update time
+            if (obj.comments.length > 0) {
+                obj["date"] = obj.comments[obj.comments.length - 1].addTime
+            } else {
+                obj["date"] = obj.addTime
+            }
 
             const { cid } = obj
             const cJson = categories.get(cid)
