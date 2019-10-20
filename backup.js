@@ -51,7 +51,7 @@ categoryBackupHelper.start().then(() => {
         outputDir,
         types: ["article"],
         serializer: "markdown",
-        maxConcurrent: 10,
+        maxConcurrent: 4,
     })
 
     helper.setFileNameFn(
@@ -102,7 +102,7 @@ const userBackupHelper = new youbbsBackupHelper({
     outputDir,
     types: ["user"],
     serializer: "markdown",
-    maxConcurrent: 10,
+    maxConcurrent: 4,
 })
 userBackupHelper.pipe(
     /**
