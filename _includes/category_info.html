@@ -1,10 +1,6 @@
 {% assign categoryName = page.categories[0] %}
 
-{% for category in site.categories %}
-    {% if category[0] == categoryName %}
-        {% assign categorySize = category[1] | size %}
-    {% endif %}
-{% endfor %}
+{% assign categorySize = site.categories[categoryName] | size %}
 
 {% for category in site.category_info %}
     {% if category.name == categoryName %}

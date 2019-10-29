@@ -1,10 +1,6 @@
 <div class="post-list">
 
-    {% for user in site.users %}
-        {% if user.userID == article.authorID %}
-            {% assign _post_author_info = user %}
-        {% endif %}
-    {% endfor %}
+    {% assign _post_author_info = site.users | where: "userID", article.authorID | first %}
 
     <div class="item-avatar">
         <a href="{{ baseURL }}/member/{{ article.authorID }}">

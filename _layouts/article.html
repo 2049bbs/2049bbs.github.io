@@ -6,7 +6,7 @@ layout: default
 
 {% include category_info.html %}
 
-{% include article_author_info.html %}
+{% assign article_author_info = site.users | where: "userID", page.authorID | first %}
 
 <div class="nav-title">
     <div class="float-left fs14">
@@ -58,12 +58,8 @@ layout: default
 <div class="main-box home-box-list">
     {% for comment in page.comments %}
         <a name="{{ forloop.index }}"></a>
-        
-        {% for user in site.users %}
-            {% if user.userID == comment.authorID %}
-                {% assign comment_author_info = user %}
-            {% endif %}
-        {% endfor %}
+
+        {% assign comment_author_info = site.users | where: "userID", comment.authorID | first %}
 
         <div class="commont-item">
             <div class="commont-avatar">

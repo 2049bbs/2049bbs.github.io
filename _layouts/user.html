@@ -4,13 +4,7 @@ layout: default
 
 {% include get_baseurl.html %}
 
-{% assign user_articles = "" | split: "," %}
-
-{% for article in site.posts %}
-    {% if article.authorID == page.userID %}
-        {% assign user_articles = user_articles | push: article %}
-    {% endif %}
-{% endfor %}
+{% assign user_articles = site.posts | where: "authorID", page.userID %}
 
 <div class="nav-title">
     <a href="{{ baseURL }}/">{{ site.name }}</a> » 会员：{{ page.userName }}
