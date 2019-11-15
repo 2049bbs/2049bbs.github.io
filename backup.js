@@ -144,8 +144,12 @@ Promise.all([
                 if (addTimeList.length > 0) {
                     const [postAddTime, ...commentAddTimeList] = addTimeList
                     obj.addTime = postAddTime
-                    commentAddTimeList.forEach((value, index) => {
-                        obj.comments[index].addTime = value
+                    obj.comments.forEach((comment, index) => {
+                        if (commentAddTimeList[index]) {
+                            comment.addTime = commentAddTimeList[index]
+                        } else if (isUninitializedTime(comment.addTime)) {
+                            comment.addTime = getPastHalfHour()
+                        }
                     })
                 }
             } else {
