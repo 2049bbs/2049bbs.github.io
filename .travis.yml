@@ -13,9 +13,6 @@ branches:
     - master
 
 before_install:
-  - if [[ $TRAVIS_EVENT_TYPE == "cron" ]]; then
-      exit;
-    fi
   - eval "$(ssh-agent -s)"
   - openssl aes-256-cbc -k "$ssh_key_decrypt_password" -in id_rsa.enc -out $HOME/.ssh/id_rsa -d
   - chmod 600 $HOME/.ssh/id_rsa
