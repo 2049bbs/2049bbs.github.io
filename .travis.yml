@@ -25,13 +25,6 @@ install:
   - npm install
 
 before_script:
-  - if [[ $TRAVIS_EVENT_TYPE == "push" && $TRAVIS_COMMIT_MESSAGE != *"[skip waiting]"* ]]; then
-      for i in {20..1};
-      do
-        echo "Waiting. $i minute(s) left.";
-        sleep 60;
-      done;
-    fi
   - git fetch
   - git checkout -f master
 
@@ -41,3 +34,9 @@ script:
   - git add .
   - git commit -m "$(date --iso-8601=minutes -u)"
   - git push
+
+after_script:
+  - for i in {20..1}; do
+      echo "Waiting. $i minute(s) left.";
+      sleep 60;
+    done
