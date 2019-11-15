@@ -30,7 +30,7 @@ install:
   - npm install
 
 before_script:
-  - if [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
+  - if [[ $TRAVIS_EVENT_TYPE == "push" && $TRAVIS_COMMIT_MESSAGE != *"[skip waiting]"* ]]; then
       for i in {20..1};
       do
         echo "Waiting. $i minute(s) left.";
