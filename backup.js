@@ -11,6 +11,13 @@ const path = require("path")
 const baseURL = "https://2049bbs.xyz"
 const outputDir = "tmp"
 
+const SEC = 1000  // ms
+const MIN = 60 * SEC
+// const HOUR = 60 * MIN
+// const DAY = 24 * HOUR
+
+const SCRIPT_START_TIME = new Date()
+
 /**
  * @param {string} src 
  * @param {string} dest 
@@ -72,6 +79,35 @@ const readPostAddTimes = () => {
     })
 }
 
+/**
+ * @param {Date} d 
+ */
+const getDateString = (d) => {
+    return d.toISOString().match(/^(.+)T/)[1]
+}
+
+/**
+ * @param {Date} d 
+ */
+const getTimeString = (d) => {
+    return d.toISOString().match(/T(.+)\.\d+Z/)[1]
+}
+
+/**
+ * @param {Date} d 
+ */
+const getPastHalfHour = (d = SCRIPT_START_TIME) => {
+    const a = +d % (30 * MIN)
+    return new Date(+d - a)
+}
+
+/**
+ * @param {Date} d 
+ */
+const isUninitializedTime = (d) => {
+    return getTimeString(d) == "00:00:00"
+}
+
 Promise.all([
     categoryBackupHelper.start(),
     readPostAddTimes()
@@ -82,7 +118,7 @@ Promise.all([
         outputDir,
         types: ["article"],
         serializer: "markdown",
-        maxConcurrent: 4,
+        maxConcurrent: 5,
     })
 
     helper.setFileNameFn(
@@ -93,7 +129,7 @@ Promise.all([
             if (addTimes.has(id) && addTimes.get(id).length > 0) {
                 obj.addTime = addTimes.get(id)[0]
             }
-            const date = obj.addTime.toISOString().match(/^(.+)T/)[1]
+            const date = getDateString(obj.addTime)
             return `${date}-${id}.${fileExt}`
         }
     )
@@ -112,6 +148,15 @@ Promise.all([
                         obj.comments[index].addTime = value
                     })
                 }
+            } else {
+                if (isUninitializedTime(obj.addTime)) {
+                    obj.addTime = getPastHalfHour()
+                }
+                obj.comments.forEach((comment) => {
+                    if (isUninitializedTime(comment.addTime)) {
+                        comment.addTime = getPastHalfHour()
+                    }
+                })
             }
 
             // update time
@@ -160,7 +205,7 @@ _readDir("_users").then(async (files) => {
         outputDir,
         types: ["user"],
         serializer: "markdown",
-        maxConcurrent: 4,
+        maxConcurrent: 5,
     })
     userBackupHelper.pipe(
         /**
@@ -173,6 +218,8 @@ _readDir("_users").then(async (files) => {
 
             if (usersRegTime.has(obj.userID)) {
                 obj.regTime = usersRegTime.get(obj.userID)
+            } else if (isUninitializedTime(obj.regTime)) {
+                obj.regTime = getPastHalfHour()
             }
 
             return obj
