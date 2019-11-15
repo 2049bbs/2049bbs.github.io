@@ -13,6 +13,7 @@ branches:
     - master
 
 before_install:
+  - START_TIME=$(date +%s)
   - eval "$(ssh-agent -s)"
   - openssl aes-256-cbc -k "$ssh_key_decrypt_password" -in id_rsa.enc -out $HOME/.ssh/id_rsa -d
   - chmod 600 $HOME/.ssh/id_rsa
@@ -36,7 +37,9 @@ script:
   - git push
 
 after_script:
-  - for i in {20..1}; do
+  - FINISH_TIME=$(date +%s)
+  - WAITING_MIN=$(( 30 - ((FINISH_TIME - START_TIME) / 60) ))
+  - for i in $(seq $WAITING_MIN -1 1); do
       echo "Waiting. $i minute(s) left.";
       sleep 60;
     done
