@@ -27,6 +27,13 @@ install:
   - npm install
 
 before_script:
+  - if [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
+      for i in {20..1};
+      do
+        echo "Waiting. $i minute(s) left.";
+        sleep 60;
+      done;
+    fi
   - git fetch
   - git checkout -f master
 
@@ -34,5 +41,5 @@ script:
   - npm run backup
   - git pull
   - git add .
-  - git commit -m "$(date --iso-8601) [skip ci]"
+  - git commit -m "$(date --iso-8601=minutes -u)"
   - git push
