@@ -105,7 +105,7 @@ const getPastHalfHour = (d = SCRIPT_START_TIME) => {
  * @param {Date} d 
  */
 const isUninitializedTime = (d) => {
-    return getTimeString(d) == "00:00:00"
+    return getTimeString(d) == "16:00:00"
 }
 
 Promise.all([
