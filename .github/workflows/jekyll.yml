@@ -19,7 +19,7 @@ jobs:
       run: |
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/minimal:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
+        jekyll/jekyll:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@master
