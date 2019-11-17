@@ -19,7 +19,7 @@ jobs:
       run: |
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/jekyll:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
+        jekyll/jekyll:latest /bin/bash -c "export JEKYLL_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} && export PAGES_REPO_NWO=${{ github.repository }} && chmod 777 /srv/jekyll && jekyll build --future"
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@master
