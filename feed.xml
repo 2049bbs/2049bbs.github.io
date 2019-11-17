@@ -6,12 +6,12 @@ layout: null
 
 	<title>{{ site.name }}</title>
 
-	<link rel="self" type="application/atom+xml" href="{{ site.url }}{{ site.baseurl }}/feed.xml"/>
+	<link rel="self" type="application/atom+xml" href="{{ site.github.url }}/feed.xml"/>
 	<link rel="hub" href="https://pubsubhubbub.appspot.com"/>
 
 	<updated>{{ site.time | date_to_xmlschema }}</updated>
 
-	<id>{{ site.url }}{{ site.baseurl }}/feed.xml</id>
+	<id>{{ site.github.url }}/feed.xml</id>
 
 	<author>
 		<name>{{ site.name }}</name>
@@ -20,8 +20,8 @@ layout: null
     {% for post in site.posts limit: 20 %}
 	<entry>
 		<title>{{ post.title | xml_escape }}</title>
-		<id>{{ site.url }}{{ site.baseurl }}{{ post.url }}</id>
-		<link type="text/html" href="{{ site.url }}{{ site.baseurl }}{{ post.url }}" />
+		<id>{{ site.github.url }}{{ post.url }}</id>
+		<link type="text/html" href="{{ site.github.url }}{{ post.url }}" />
 		<link rel="alternate" type="text/html" href="https://cdn.statically.io/gh/{{ site.github.repository_nwo }}/gh-pages{{ post.url }}.html?env=dev" />
 		<published>{{ post.addTime | date_to_xmlschema }}</published>
 		<updated>{{ post.date | date_to_xmlschema }}</updated>
