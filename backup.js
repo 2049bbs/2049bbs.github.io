@@ -121,19 +121,6 @@ Promise.all([
         maxConcurrent: 5,
     })
 
-    helper.setFileNameFn(
-        /**
-         * @param {Article} obj
-         */
-        (obj, id, fileExt) => {
-            if (addTimes.has(id) && addTimes.get(id).length > 0) {
-                obj.addTime = addTimes.get(id)[0]
-            }
-            const date = getDateString(obj.addTime)
-            return `${date}-${id}.${fileExt}`
-        }
-    )
-
     helper.pipe(
         /**
          * @param {Article} obj
@@ -181,6 +168,16 @@ Promise.all([
                 .replace(/%}/g, "% }")
 
             return obj
+        }
+    )
+
+    helper.setFileNameFn(
+        /**
+         * @param {Article} obj
+         */
+        (obj, id, fileExt) => {
+            const date = getDateString(obj.addTime)
+            return `${date}-${id}.${fileExt}`
         }
     )
 
