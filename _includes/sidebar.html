@@ -2,14 +2,16 @@
 
     <div class="sider-box">
 
-        <div class="sider-box-title">热门主题</div>
+        <div class="sider-box-title">关于</div>
 
         <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
             <div class="btn">
-                {% assign hot_categories = site.category_info | sample: 20 %}
-                {% for category in hot_categories %}
-                <a href="{{ baseURL }}/n/{{ category.cid }}.html">{{ category.name }}</a>
-                {% endfor %}
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href="{{ baseURL }}/t/1860.html">节点订阅功能帮助</a>
+                {% if page.collection == "category_info" %}<a href="https://2049bbs.github.io/feed/{{ page.cid }}.xml">订阅此节点</a>{% endif %}
             </div>
             <div class="c"></div>
         </div>
@@ -18,7 +20,18 @@
 
     <div class="sider-box">
 
-        <div class="sider-box-title">新增主题</div>
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz{{ page.url }}">https://2049bbs.xyz{{ page.url }}</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
 
         <div class="sider-box-content">
             <div class="btn">
