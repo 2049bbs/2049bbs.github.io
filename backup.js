@@ -96,8 +96,8 @@ const getTimeString = (d) => {
 /**
  * @param {Date} d 
  */
-const getPast15Min = (d = SCRIPT_START_TIME) => {
-    const a = +d % (15 * MIN)
+const getPast20Min = (d = SCRIPT_START_TIME) => {
+    const a = +d % (20 * MIN)
     return new Date(+d - a)
 }
 
@@ -135,17 +135,17 @@ Promise.all([
                         if (commentAddTimeList[index]) {
                             comment.addTime = commentAddTimeList[index]
                         } else if (isUninitializedTime(comment.addTime)) {
-                            comment.addTime = getPast15Min()
+                            comment.addTime = getPast20Min()
                         }
                     })
                 }
             } else {
                 if (isUninitializedTime(obj.addTime)) {
-                    obj.addTime = getPast15Min()
+                    obj.addTime = getPast20Min()
                 }
                 obj.comments.forEach((comment) => {
                     if (isUninitializedTime(comment.addTime)) {
-                        comment.addTime = getPast15Min()
+                        comment.addTime = getPast20Min()
                     }
                 })
             }
@@ -220,7 +220,7 @@ _readDir("_users").then(async (files) => {
             if (usersRegTime.has(obj.userID)) {
                 obj.regTime = usersRegTime.get(obj.userID)
             } else if (isUninitializedTime(obj.regTime)) {
-                obj.regTime = getPast15Min()
+                obj.regTime = getPast20Min()
             }
 
             return obj
