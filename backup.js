@@ -118,7 +118,7 @@ Promise.all([
         outputDir,
         types: ["article"],
         serializer: "markdown",
-        maxConcurrent: 2,
+        maxConcurrent: 5,
     })
 
     helper.pipe(
@@ -206,7 +206,7 @@ _readDir("_users").then(async (files) => {
         outputDir,
         types: ["user"],
         serializer: "markdown",
-        maxConcurrent: 2,
+        maxConcurrent: 5,
     })
     userBackupHelper.pipe(
         /**
