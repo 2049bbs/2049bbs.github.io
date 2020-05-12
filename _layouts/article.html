@@ -4,13 +4,13 @@ layout: default
 
 {% include get_baseurl.html %}
 
-{% include category_info.html %}
+{% assign categoryName = page.categories[0] %}
 
 {% assign article_author_info = site.users | where: "userID", page.authorID | first %}
 
 <div class="nav-title">
     <div class="float-left fs14">
-        <a href="{{ baseURL }}/index.html">{{ site.name }}</a> » <a href="{{ baseURL }}/n/{{ cid }}.html">{{ categoryName }}</a> ({{ categorySize }})
+        <a href="{{ baseURL }}/index.html">{{ site.name }}</a> » <a href="{{ baseURL }}/n/{{ page.cid }}.html">{{ categoryName }}</a>
     </div>
 
     <div class="c"></div>
