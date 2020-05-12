@@ -13,15 +13,8 @@
             <a href="{{ baseURL }}/t/{{ article.aid }}.html">{{ article.title }}</a>
         </h1>
 
-        {% for category in site.category_info %}
-            {% if category.name == article.categories[0] %}
-                {% assign cid = category.cid %}
-                {% assign cName = category.name %}
-            {% endif %}
-        {% endfor %}
-        
         <span class="item-date">
-            <a href="{{ baseURL }}/n/{{ cid }}.html">{{ cName }}</a> • <a href="{{ baseURL }}/member/{{ article.authorID }}.html">{{ _post_author_info.userName }}</a>
+            <a href="{{ baseURL }}/n/{{ article.cid }}.html">{{ article.categories[0] }}</a> • <a href="{{ baseURL }}/member/{{ article.authorID }}.html">{{ _post_author_info.userName }}</a>
             • {{ article.addTime | date: "%Y-%m-%d" }}
         </span>
     </div>
