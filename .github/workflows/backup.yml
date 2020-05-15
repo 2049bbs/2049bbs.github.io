@@ -17,6 +17,7 @@ jobs:
           node-version: 12
 
       - run: eval "$(ssh-agent -s)"
+      - run: mkdir $HOME/.ssh
       - run: openssl aes-256-cbc -k "${{ secrets.ssh_key_decrypt_password }}" -in id_rsa.enc -out $HOME/.ssh/id_rsa -d
       - run: chmod 600 $HOME/.ssh/id_rsa
       - run: ssh-add $HOME/.ssh/id_rsa
