@@ -16,11 +16,9 @@ jobs:
         with:
           node-version: 12
 
-      - run: eval "$(ssh-agent -s)"
-      - run: mkdir $HOME/.ssh
-      - run: openssl aes-256-cbc -k "${{ secrets.ssh_key_decrypt_password }}" -in id_rsa.enc -out $HOME/.ssh/id_rsa -d
-      - run: chmod 600 $HOME/.ssh/id_rsa
-      - run: ssh-add $HOME/.ssh/id_rsa
+      - uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - run: git config --global user.email bot@example.com
       - run: git config --global user.name bot
