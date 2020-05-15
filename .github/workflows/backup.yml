@@ -29,11 +29,16 @@ jobs:
       - run: git fetch
       - run: git checkout -f master
 
-      - run: npm run backup
+      - run: export COOKIE=$(node cookie.js)
         env:
-          COOKIE: ${{ secrets.COOKIE }}
+          GIST: ${{ secrets.GIST }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+      - run: "[[ -z $COOKIE ]] || echo 'cookie is set'"
 
-      - run: git pull -s recursive -Xours
+      - run: npm run backup
+
+      - run: git fetch
+      - run: git merge -s ours -m "merged"
       - run: git add .
       - run: git commit -m "$(date --iso-8601=minutes -u) [skip ci]"
       - run: git push
