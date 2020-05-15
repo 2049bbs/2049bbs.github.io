@@ -29,13 +29,13 @@ jobs:
       - run: git fetch
       - run: git checkout -f master
 
-      - run: export COOKIE=$(node cookie.js)
+      - run: |
+          export COOKIE=$(node cookie.js);
+          [[ -z $COOKIE ]] || echo 'cookie is set';
+          npm run backup;
         env:
           GIST: ${{ secrets.GIST }}
           AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-      - run: "[[ -z $COOKIE ]] || echo 'cookie is set'"
-
-      - run: npm run backup
 
       - run: git fetch
       - run: git merge -s ours -m "merged"
