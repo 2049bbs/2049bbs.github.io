@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>向大家推荐一个Heroku+云数据库的敏感web应用和论坛搭建方案 - 技术 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/3.html">技术</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>向大家推荐一个Heroku+云数据库的敏感web应用和论坛搭建方案</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/1874.html">chinatimeline</a>
+                at 2020-02-08
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/1874.html">
+                <img src="data:image/jpeg;base64,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" alt="chinatimeline">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <p><em>Warning: 非程序员请自动忽略本文</em></p>
+
+<p>开发一个电报机器人、部署一个论坛或翻墙的梯子对程序员来说通常不是什么难事，但如果该应用或论坛是“敏感”的， <strong>完全匿名化的部署就是一个难题</strong> 。比方要部署2049bbs这样一个论坛，有三样东西难免会跟自己的实名身份挂钩：服务器、域名、数据库。2049bbs的站长或许有过人胆量和借壳下蛋的独门绝技来保护自己免受中共追踪，但这种做法无疑是把自己的性命和隐私交到了海外的跨国公司手中，并不是真正的匿名部署。</p>
+
+<h2 id="要素一主机"><a href="#%E8%A6%81%E7%B4%A0%E4%B8%80-%E4%B8%BB%E6%9C%BA"></a>要素一：主机</h2>
+
+<p>首先来说 <strong>服务器</strong>（又名 <strong>主机</strong> ）。论坛或web应用都是动态的，而动态网站必须要有自己的主机。相比之下，作为静态页面的博客类敏感网站门槛低得多，去wordpress注册一个免费博客（如<a href="https://www.iyouport.org/">iYouPort</a>）或github pages那种静态页面网站（比如<a href="https://github.com/Terminus2049">端点星</a>，<a href="https://damoresclub.github.io/">达摩俱乐部</a>，以及在下的<a href="https://chinatimeline.github.io/">中国时间线</a>）就可以了。虽然github等代码托管平台可以利用github action或者<a href="https://travis-ci.org">travis-ci.org</a>之类服务自动化很多工作，但是这种静态页面即便是玩出花来，功能跟动态网站或web应用没有可比性。</p>
+
+<p>其实对于非敏感网站而言主机根本就不是个事儿，每个月花一杯咖啡的钱就能租到一台云主机，甚至直接用自己的家用电脑都可以。但之所以 <strong>反制中共舆论战</strong> 的事业没能在广大程序员中遍地开花，缺乏对赵弹免疫的真匿名主机可能是最大的瓶颈，连<a href="https://program-think.blogspot.com">编程随想</a>也坦言自己之所以用公共博客平台就是因为不用花钱，而一旦刷卡花钱就不是真匿名了。</p>
+
+<p><strong>好消息，好消息，江南皮革厂的老板离婚了，现清仓一批</strong> 美国云端大厂<a href="https://www.heroku.com">heroku</a>提供的免费云主机，编程语言 Node.js, Ruby, Java, PHP, Python, Go, Scala, Clojure任你选择，提供免费的二级域名和https <code class="highlighter-rouge">https://&lt;your-web-application&gt;.herokuapp.com</code>，全部免费，样样免费，24小时在线的真匿名动态应用不再是梦，连编程随想都可以更上一层楼了。</p>
+
+<h2 id="要素二域名"><a href="#%E8%A6%81%E7%B4%A0%E4%BA%8C-%E5%9F%9F%E5%90%8D"></a>要素二：域名</h2>
+
+<p>如果没有 <strong>域名</strong> ，就只能用类似<a href="http://206.189.252.32:8085/">http://206.189.252.32:8085/</a>的纯IP地址去访问论坛。纯IP地址一来很难记住，二来暴露自己主机的IP大大增加了攻击面，比如中共黑客部队可以用DDOS瘫痪你的应用或网站、利用某些0day漏洞入侵你的主机，同时IP地址还暴露你的主机提供商，为黑客挖掘你的真实身份提供重要线索，如果你用自己家电脑作主机那就更是直接暴露身份了。</p>
+
+<p>上述威胁是可以通过购买域名来解决，比如2049bbs的主机就藏在Cloudflare背后。2049bbs.xyz这样的一级域名必须得花钱买，虽然域名商提供收费服务保护你的隐私，但不是真匿名就始终不安全，万一中共御用黑客某天获取了域名商的交易记录，那你的真实身份就暴露了。所以要想轻松愉快的开展反对中共的网络人民战争，必须得「真匿名部署」，而「真匿名部署」就不得不放弃一级域名，选择免费的二级域名，比如这样的。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://&lt;your-web-application&gt;.herokuapp.com
+https://&lt;your-github-username&gt;.github.io
+https://&lt;your-gitlab-username&gt;.gitlab.io
+</code></pre></div></div>
+
+<p>挂在github, gitlab, heroku 等云端大厂下的二级域名也没什么不好，除了稍微长一点，该有的保护都自带了，不必担心受到黑客攻击。</p>
+
+<h2 id="要素三数据库"><a href="#%E8%A6%81%E7%B4%A0%E4%B8%89-%E6%95%B0%E6%8D%AE%E5%BA%93"></a>要素三：数据库</h2>
+
+<p>同样，对非敏感网站而言，数据库根本就不是个事儿，直接在主机建一个本地数据库就行了。但heroku的免费计划是不提供数据库的，要开启数据库功能得提供信用卡信息。当然heroku已经能满足类似staticman这样不需要数据库的应用了，但数据库对论坛或更复杂的应用而言还是必须的。</p>
+
+<p>数据库的问题没有前面两个要素那么严重。因为web应用或论坛的数据库访问都是在后台，黑客只有攻入你的heroku主机才能看到你的数据库在哪儿。如果你认为heroku主机足够安全，直接用花钱租的主机或者跟实名挂钩的Google Cloud来做后台数据库也问题不大，前提是你信任Google或主机商不会出卖你。不过万一中共在主机商或Google内部有内鬼，你还是会暴露。</p>
+
+<p>那么，终极方案就是： <strong>好消息，好消息，江南……</strong></p>
+
+<p>直接搜索关键词 <code class="highlighter-rouge">free database host</code> 就能找到一堆提供免费数据库的主机商，对于一般的论坛而已肯定是够用了，像2049或品葱的数据库也就几十M。</p>
+
+<h2 id="总结"><a href="#%E6%80%BB%E7%BB%93"></a>总结</h2>
+
+<p>有了不跟信用卡挂钩的免费主机、免费二级域名、免费数据库，你就做到了「真匿名」，即便中共攻破了所有的服务器和提供商，最多也就是破坏你的应用或网站而已，绝对没办法查到你的真实身份。只要你严格的通过Tor实施「真匿名部署」，中共要查到你的真实身份得先攻陷CIA才行。中共御用黑客真能攻陷CIA的网络的话，先抓一堆党政军内的CIA线人和间谍，再要称霸全世界，轮得到抓你或者编程随想这种小咖吗？</p>
+
+<p>「真匿名部署」动态应用，希望掀起一股风暴，让Telegram机器人、反共论坛、以及各种创意的动态服务遍地开花，让我们从中共手中抢回更多本来属于公民的信息权和言论自由。</p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/Heroku">Heroku</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/web">web</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/数据库">数据库</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/搭建">搭建</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/敏感">敏感</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 2 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+        <a name="1"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/1874.html">
+                    <img src="data:image/jpeg;base64,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" alt="chinatimeline">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>总之，靠傍大厂的大腿是可以做一些「不那么极端」的反共事业，但必须得像小二这样扭扭捏捏、躲躲闪闪、遮遮掩掩，穿上一身「只是不满言论审查的温和派」、「本质上还是可以被引导、被统战的理想主义青年」、「虽然不满但意识形态跟思维方式还属于中国特色社会主义范畴的可控异议人士」之类的 <strong>迷彩服</strong> 来降低自己对中共的威胁等级，化解赵弹打击。</p>
+
+<p>但要明目张胆、热情奔放、轻松愉快的从事无限制级反共事业，争取人权、自由、民主，还是得靠「真匿名部署」。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/1874.html">chinatimeline</a>
+                        at 2020-02-08
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">1</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="2"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/1874.html">
+                    <img src="data:image/jpeg;base64,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" alt="chinatimeline">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>用习总书记的话来说，就是我们 <strong>既要</strong> 傍大厂的大腿，<strong>又要</strong> 防大厂的内鬼， <strong>还要</strong> 站着把钱给挣了。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/1874.html">chinatimeline</a>
+                        at 2020-02-08
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">2</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/2911">https://2049bbs.xyz/t/2911</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

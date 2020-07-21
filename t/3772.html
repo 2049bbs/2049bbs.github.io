@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>2020年3月26日大陸GitHub事件分析 - 技术 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/3.html">技术</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>2020年3月26日大陸GitHub事件分析</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/3619.html">霏艺Faye</a>
+                at 2020-03-28
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/3619.html">
+                <img src="data:image/jpeg;base64,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" alt="霏艺Faye">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <p>墻内鏈接，慎點 https://www.secrss.com/articles/13373</p>
+
+<p>習近平不知道腦子出了什麽問題，為GFW辯稱說這個叫維護<strong>國家主權</strong>。</p>
+
+<p>還發明了一個專有詞匯，<strong>國家網絡主權</strong>。GFW維護了國家的網絡主權。</p>
+
+<p>從那以後，邪惡國家<strong>不約而同</strong>地響應了中共的<strong>網絡主權</strong>申明！</p>
+
+<p>哪裏有什麽網絡主權啊？<strong>完全是爲了自己不要臉的合法化啊！</strong></p>
+
+<h1 id="分析"><a href="#%E5%88%86%E6%9E%90"></a>分析</h1>
+
+<p><strong>本文不是針對小白的！</strong>而且需要看完我在<strong>品蔥的基礎知識講解</strong>，並閲讀本樓的<strong>墻内鏈接</strong>，才能明白我接下來説的話。</p>
+
+<p>shadowsocks不走TLS協議，所以<strong>不用考慮這次TLS攻擊的影響</strong>！</p>
+
+<p>v2ray協議是跑在vmess協議的，也<strong>不受TLS影響</strong>。回過頭看看v2ray的wss方式翻墻。</p>
+
+<p>v2ray有個配置項 ，禁用操作系統的根證書，只識別自己的指定的根證書，<strong>解決這類問題</strong>。</p>
+
+<p>所以，GFW這次攻擊，和翻墻沒有<strong>一分錢關係</strong>！</p>
+
+<p>那麽爲什麽要做這種事情呢？我覺得單純是爲了對境外網站推行白名單！</p>
+
+<p>也就是說，訪問境外的TLS的時候，用中共自己的根證書對中國人進行<strong>無差別中間人攻擊</strong>。</p>
+
+<p>原理就和你電腦裏安裝了<strong>卡巴斯基</strong>一樣。不懂的人，可以安裝一個卡巴斯基，然後看看自己的瀏覽器訪問任何網站<strong>都是卡巴斯基的證書</strong>了！這個就是中共想要的效果！也正是2010年綠壩的初衷！</p>
+
+<p>很多人沒有用過卡巴斯基，那麽可以瞭解下你怎麽抓包Android的流量的，charles也好，wireshark也好，fiddler也好，道理都是一樣的！當年，Android的安全性很差，你自己簽個根證書導入自己的手機，然後用fiddler做中間人攻擊，就可以看到微信的明文傳輸了對吧！現在這個bug已經沒有了。我們也不知道微信怎麽通信了。</p>
+
+<p>中共的中間人攻擊，就像我們抓包分析微信的協議。像卡巴斯基掃描你上網在做什麽。這樣，我們https上網就和http上網一樣的效果了，完成了監控。而中共就像卡巴斯基。</p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/2020">2020</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/26">26</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/日大陸">日大陸</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/GitHub">GitHub</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/事件">事件</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 3 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+        <a name="1"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2179.html">
+                    <img src="data:image/jpeg;base64,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" alt="cunzaizhe09">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>技术问题终于还是回到了政治上的问题，究竟何为“国家”？</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2179.html">cunzaizhe09</a>
+                        at 2020-03-28
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">1</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="2"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/3615.html">
+                    <img src="data:image/jpeg;base64,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" alt="张怀义">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>https://2049bbs.xyz/t/3712</p>
+
+<p>大神，我也发了我的分析，你能不能给我点评价呢？</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/3615.html">张怀义</a>
+                        at 2020-03-28
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">2</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="3"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/3301.html">
+                    <img src="data:image/jpeg;base64,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" alt="饱读书名">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>嗯，刚发现访问 filecoin 时报证书错，用代理就正常。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/3301.html">饱读书名</a>
+                        at 2020-03-29
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">3</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/3772">https://2049bbs.xyz/t/3772</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

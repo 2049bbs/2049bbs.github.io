@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>不同浏览器禁用 WebRTC 的方法 - 技术 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/3.html">技术</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>不同浏览器禁用 WebRTC 的方法</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/3.html">无名</a>
+                at 2019-11-30
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/3.html">
+                <img src="data:image/jpeg;base64,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" alt="无名">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <ol>
+  <li>
+    <p>Chrome / Opera for PC</p>
+
+    <p>第三方插件 ublock origin, uMatrix .</p>
+  </li>
+  <li>
+    <p>Chrome for Android</p>
+
+    <p><del>输入 <code>chrome://flags/#disable-webrtc</code></del></p>
+
+    <p><del>调整”WebRTC STUN origin header” 为 enabled</del></p>
+
+    <p>这个方法在最新版 Chrome 无效。</p>
+  </li>
+  <li>
+    <p>Firefox for Android/PC</p>
+
+    <p>输入 <code class="highlighter-rouge">about:config</code></p>
+
+    <p>点击“I accept the risk!”</p>
+
+    <p>搜索 <code class="highlighter-rouge">media.peerconnection.enabled</code></p>
+
+    <p>双击 true 改为 false</p>
+
+    <p>也可以用 ublock origin 插件。</p>
+  </li>
+  <li>
+    <p>Edge</p>
+
+    <p>type <code class="highlighter-rouge">about:flags</code></p>
+
+    <p>under“WebRTC”, there’ll be an option to hide your local IP over these types of connections. Click on the checkbox to activate it.</p>
+  </li>
+  <li>
+    <p>Safari</p>
+
+    <p>无法实现。</p>
+  </li>
+</ol>
+
+<p>链接：<a href="https://buffered.com/privacy-security/how-to-disable-webrtc-in-various-browsers">https://buffered.com/privacy-security/how-to-disable-webrtc-in-various-browsers</a></p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/WebRTC">WebRTC</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/浏览器">浏览器</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/禁用">禁用</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/方法">方法</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/不同">不同</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 2 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+        <a name="1"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2701.html">
+                    <img src="data:image/jpeg;base64,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" alt="vxunseu">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>Chrome 可以通过安装扩展的方式禁用 WebRTC，有两种开源的方案为：WebRTC Leak Prevent（需依情况来调整设定选项）和 uBlock Origin （请选 “Prevent WebRTC from leaking local IP addresses”）。你可能已经注意到UBO有一个相关项，是的，它有用。</p>
+
+<p>链接： https://cybermagicsec.github.io/privacytools-zh/#webrtc</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2701.html">vxunseu</a>
+                        at 2019-11-30
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">1</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="2"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2679.html">
+                    <img src="data:image/jpeg;base64,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" alt="lishi">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>上面说的这些都是高手或者自己动手能力强的人能做到的，想简单一步快速达到此效果，可以留言</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2679.html">lishi</a>
+                        at 2019-12-01
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">2</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/2072">https://2049bbs.xyz/t/2072</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

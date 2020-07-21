@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>Izhikevich - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <a href=".././index.html">2049BBS</a> » 会员：Izhikevich
+</div>
+
+<div class="main-box">
+
+    <div class="member-avatar">
+        <img src="data:image/jpeg;base64,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" alt="Izhikevich">
+    </div>
+
+    <div class="member-detail">
+        <p>
+            会员：<strong>Izhikevich</strong> (第894号会员，2018-05-01加入)
+        </p>
+
+        <p>主贴： 0</p>
+
+        <p>
+            网站： <a href="" target="_blank" rel="nofollow"></a>
+        </p>
+
+        <p>关于： <br> 
+</p>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="nav-title">
+    Izhikevich <a>最近发表的帖子</a>
+</div>
+
+<div class="main-box home-box-list">
+    
+
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/member/894">https://2049bbs.xyz/member/894</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

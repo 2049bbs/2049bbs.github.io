@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>go语言windows桌面应用和公众号开发是否都能做呢？ - 水 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/4.html">水</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>go语言windows桌面应用和公众号开发是否都能做呢？</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/3190.html">唐建国</a>
+                at 2020-03-05
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/3190.html">
+                <img src="data:image/jpeg;base64,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" alt="唐建国">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <p>轮子多么？</p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/做呢">做呢</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/windows">windows</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/桌面">桌面</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/公众">公众</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/语言">语言</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 0 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/3288">https://2049bbs.xyz/t/3288</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

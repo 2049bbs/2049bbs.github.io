@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>deltachat——又一个开源的IM聊天工具 - 技术 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/3.html">技术</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>deltachat——又一个开源的IM聊天工具</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/91.html">star800</a>
+                at 2019-12-16
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/91.html">
+                <img src="data:image/jpeg;base64,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" alt="star800">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <p>https://delta.chat/en/</p>
+
+<p>类似telegram，只需一个email，去中心化</p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/聊天工具">聊天工具</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/deltachat">deltachat</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/IM">IM</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/开源">开源</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/一个">一个</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 1 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+        <a name="1"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/3.html">
+                    <img src="data:image/jpeg;base64,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" alt="无名">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>去中心化的前提是 通讯双方使用不同的邮箱服务。</p>
+
+<blockquote>
+  <p>Your data is not saved on a central server unless all users are using the same e-mail servers</p>
+</blockquote>
+
+<p>支持 autocrypt email app 有：deltachat, enigmail, k-9 mail, mailpile (https://autocrypt.org/install.html)</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/3.html">无名</a>
+                        at 2019-12-16
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">1</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/2284">https://2049bbs.xyz/t/2284</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

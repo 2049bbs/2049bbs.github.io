@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>阮一峰节译 danwwang 年终总结：我对中国科技行业的看法 - 分享发现 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/5.html">分享发现</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>阮一峰节译 danwwang 年终总结：我对中国科技行业的看法</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/1.html">小二</a>
+                at 2020-01-16
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/1.html">
+                <img src="data:image/jpeg;base64,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" alt="小二">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <blockquote>
+  <p>danwwang 是彭博社的一个技术分析师，写了一篇2019年回顾，详细谈了他对中国科技行业、中美贸易战的看法。</p>
+
+  <p>我觉得，他的那篇文章有很多启发，总体比较客观，中国的劣势和优势都谈到了。下面就是主要部分的翻译，插图是我配的。</p>
+</blockquote>
+
+<p>原文：https://danwang.co/2019-letter/</p>
+
+<p>译文：http://www.ruanyifeng.com/blog/2020/01/china-technology-review.html</p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/年终总结">年终总结</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/节译">节译</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/一峰">一峰</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/danwwang">danwwang</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/看法">看法</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 4 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+        <a name="1"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2156.html">
+                    <img src="data:image/jpeg;base64,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" alt="sorrysorrysorry">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>我很少只看文本来反驳//// 但我也认识到，这种假设是理论性的，有很多不确定因素。（1）也许工人无法充分理解他们使用的工具，也就无法复制并改进它。（2）尽管国内市场很大，但政策不一定会鼓励竞争，中国的生产率增长十年来一直在放缓。（3）当中国劳动力仍然比发达国家便宜很多时，很难看到投资开发世界上最好的软件和机器人系统的理由。因此，让我们拭目以待，中国未来如何应对这些实际的挑战。</p>
+
+<p>如果只看最后一点，我不得不说，印度越南人工是中国的三分之一，五分之一。理论上全球化制造业早该全部转移了才对，但答案似乎不是如此。目前印度的转移来的制造业更多的是本地生产然后本地消费的，比如手机。 越南的人工比印度贵一点，大概是中国的三分之一。但不要忘了，新疆的人工费更便宜！！！！</p>
+
+<p>人工的表面成本再低也不代表自动化产线不能落地。机器人本来就不是普世替代的，都只是局部替代。 之前日本的一个巨头搞了一个机器人做披萨，然后公司倒闭了。</p>
+
+<p>针对第一点，我要说的是，中国工人搞不定，我们可以雇佣外籍工人来搞，比如台湾，日本。事实也是如此。</p>
+
+<p>老外永远是低估中国，而且完全不了解中国人口里的乐观和实际行动上的做多是两码事</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2156.html">sorrysorrysorry</a>
+                        at 2020-01-17
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">1</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="2"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2156.html">
+                    <img src="data:image/jpeg;base64,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" alt="sorrysorrysorry">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>我挺佩服那些最近几年到深圳发展的内地人，深圳户籍的优势在于可以依赖香港最高速度的转移自己的资产。不管你是去香港，还是坐飞机去柬埔寨。</p>
+
+<p>中国人都会说乐观，但乐观更多的代表危机四伏。当中国人开始说彻底完蛋的时候，其实才是买入的最佳时机。 历史已经证明过了。因为我们没有可靠的民意调查渠道，很难真正了解实际老百姓的心里想法。 别人如果采访我我也说乐观，但实际上呢，商铺都倒闭了。小老板开始跑滴滴。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2156.html">sorrysorrysorry</a>
+                        at 2020-01-17
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">2</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="3"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/1818.html">
+                    <img src="data:image/jpeg;base64,/9j/2wCEAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgoBAgICAgICBQMDBQoHBgcKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCv/AABEIAEkASQMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APzq8KeFJHkPzS/61OkVepeFvBy2yCe4upUjWf53aHgdKwk8R+APh3dR2/jXxEdOe5YSQrMrHeqnBI2qehror/8AaJ/Z9t/DNxZ2HxHjkuZJV2oLeYjbkZP+r9BXw+FweKzHHUKbhJU5zinJJ2UXJJu9raK+r0VtT98ni8ryjBV6kq1NVacJSUJTSbkotxXLdPXTRau+hsJey6XcmPT7oSRofkdoxzkc/rmm634/8b6dpofw8kUs4dVCG2DfLzk9fpXDn4//AAfJz/wm0P8A4Dzf/EUD4/fB/PPjaD/wHm/+Ir+pMJwd4c4fBQoTp0KjjFJzl7NylZW5m+73Z/NeO4443xeIq1KWKq0lNtpQlJKN3tHeyXQZ4y/aj+Lvhq2jNrNpqSeeY5Fl00NjA/3uua4q5/bW+Pati4l0dc5250cc/wDj1Z/ijxt8NPEV9KbvXVki+1PJGVWRc5J5+76Vwcx0zVJJPs0hdYydmCRwen8q/MeL+EMhVf2mAp0lF7KFulr3stPIvhrxD41pwdPG4qu7PVyctru1m2vK56ZoP7XfxQ1bxJYWfifU9Ig0+a8ijvphpgXy4S4DtndxhSTmvcjb+F/HWiz694K8TLqdkJPK+02kZZN64yufUZH518XyQzQMEmjKkjIzX1N+xF8RvhvB8OR8Ltb8TCHX9Q1+U2GnBH3TBlQjB2ledrdSOlfkOa4NYWn7SnCzW6S/F6H7rwPxHiMyxzwmNrKUZptSlLW+yjFt21vtu3sZfjXwZLG0pEkxPnKMeT7Vyf8Awicv96b/AL8mvozx74JdJJmW3uSPPXuPSuL/AOEQk/597iuChjE6aZ9vjsltXehw37R3wJ+JXxB1rSbjwD4Ju9Sjt7SSO4a2kT5HZwQDuYdRXFaR+wv+1fr7yR6P8DNYuGifbIElgG04BxzIOxFfbXhbTo4bSeUxJxdQ5+hYA/oa80/bD+J3xD+FnxzuND+F/jnWNAsJNJtbhrTTL54kaRgwZyAepCrk+wqsFxFmtNLDUZWSTtdy736PzPjuOuGckwlX65VU3UqtPTl5UkuXrG99F1Pn5v8Agnh+2YgJb9nnWwAOT59t/wDHaB/wTx/bKKlh+z3rWB1P2i2/+O1+g37IH/BL/wD4Kp/ts/s/aL+0h8J/2qNKs9B16S6Szt9d8X38VypguJLd9yx20ijLxNjDHjHTpXF/8FJP2L/+Ckf/AAS5/Z7tv2kf2hv2moNS0C68S2uiR23hTxVeXFz9onjmkRis0ES7AIHyd2ckcHnHuxx3Fs4qUdU/8f8A8kfmzoZBF2af/kv+R8Wr/wAE8f2ynzt/Z71o46/6Rbf/AB2pbT/gn7+2ralhbfs+62ucZ/fW39Za6HS/2sP2gdR0KDXLT43+LFguLRbhEbV3DbSu4AjPXBr9IPD3/BCr/gsd4j0Gx8Q2H7W3hZIL60iuYFl8bakGCugYAgWZAODzzWVLMuJ67ag07b6z/wDkhzwmQpe9F2f+H/I/L65/YD/bSkcNc/ADWicYX99bf/Ha6r4CfsaftO/Dr43+FPF3j34NappulWWtRteXs8sOyNSGUE7ZCepA4HevWP8AgpN4O/bb/wCCW/xa8I/Br9on9oS+1LVPGeltf6VL4U8Q3FxBHELj7ORI00cRVt3OACMd88VxvwV+N3xg8Z/GPwt4a8ZfFHxBqem3WuwLdWN3qcjxyqCTgrnnkA/hXDj8RncKcvrCiuZP+a9rebPSyeWT4bMKFWmpNQnF2XL0knbY+jPHnhjckpFsc+euf3ntXEf8It/06/8AkWvVNQtRd6fcsyZVdSdUDE5Cg8Cud/sxP+eSV8dSrOMbNn9SOlSxtKniIxspxUlffVXLHhWxNzZzwxopJuIiAeM4YHH6Vy/x9/ZJ+JP7TPxQuviD4W1HRdItoLW3082uo3MjOWjTcXBjjI2nzAAOvBrqPAV0N0nT/Xp3r1/4ZX1iP7Qs7i7hjll1NfJiknUNIfKjxtBOScg9Kh16uHrOUN7f5Hy/G2VYPHZJCvUTcoySWvR3ueC+Cf2Vv+ChXw48OQeDvh1+2NqXh/SLQu1tpWieNdWtLaEuxdtsUW1FyxLHA5JJPJqh8Uf2Mv24/jb4bXwd8av2pn8YaPHdrcppPinxXqeo2yzoGCyiK4DoHAZgGxkBjg8mvr6KKVCFWXgZ3YHX2ocqApkVsbuc1v8A23mCXxH5D/YuX/y/ifCEP/BLX4zwx/Ybfxn4SSONAixI9wFC4wAB5XTHGK9QtfgT/wAFObS2itLL9u/xLFCkYSGKL4ia2qoqjAUANgAAYAFS/EP/AIJyw+NfHGseN5Pjjqtn/bOqT3n2WHSwywebIW2A+cMgZxnA6V9L2VvJaWkFukm/ZEqFjxwBjP44rSpm+JpJOnUu3vpb/hztxfD+S0oQdGo5t7qzVtu+/XbsfFvxS/YA/at+Nms2XiL42fHPT/F+o6bEYdOvvFWs3+oT2ke7eUje4R2Rd3zYUgZ561D4E/YN+Lfwh+IOgfETV/Efh++ttM1iCWS3s55hJIC23gvGF796+4JihQsw4Iwa43x9qVgbBdOju4TcJfW+63Eq7wPMBztznpz9Kwnm+Oqrlk7r0KyrIMurZlRpuLtKcU7Po5K5xGpafLY2UyXMSK0t80pRTuC7u2e9c35I/ur+VdX4uugI3Ix/rl7+1cf9o9h+dcdNuUbs/o2pQo4WEKNNe7FJL0WiOX8Aa9EJJB50XM8fevV9FuYJ5ILyJrcT216k0Ejx7sMuCO4OPoRXzV4E8WxLI+bxf+PiP/lmf8K77VPi1c2umz6V4aupv7QS7iDTRWy7YVYqWOW4zsz2PWvoMLkGY5zmUMJgoOU5NLRN2TaXM7J2ir3btojxcvzDDSwso1tYtNNd073W/VH0VZeKvFsyAnUdOwSePsb4/wDRlXNK13xDc+IbTT9QnspIJoZmbybZlcFApBBLkdz2r5hh+K3xMgULH40ugB28uL/4ivf/AIDRz694I0jxzresXdxqLxXKM0koCY85kzsCgA4RRn6+tezxb4a8R8FYGGLzCdNwnLkXI23dptXvCOmj6ng8QU+FcLlcvZYZxqS0i+z8/e/RnezZkkEfUDkkdvesjxLreu2XiCDTdKntYozZtK5uIGkJYOFGMMoAwTWtcKVnBAznoB6VzfxW0xk8P6h4ps7+5t7zTtDu2gaGUBcqpcblIIbDKD+lfBUacq1VU47yaSv3eh8Jk9XL6OYwnjoOdJXulu9HbqutuoXGueK8lzqOmg4/58G/+OVz96ohurvUb17d7m5dGkljh2dFCgDJJ6D1rwtvjB8UnHzeNro5H/PKL/4itnwn8ZryW1l0nxjqFzLdzXqpaXT2ylWVlXAJXHO7cOnpX6ZxB4QcZcOZc8biFCpBPVU+aUkrNuTXIrRVtW3pofsmAjw5gMR7TC0PZzs1d/l8T3Oo8baxFDHJ++j/ANcvU+1cV/b0X/PaH8//AK9Q+P8AxhD++X7WvE68eWfT6Vw3/CXw/wDP0v8A36/+tXxGHwsnT2ObH5jBV3qeUeDPGrRysGupuZkxhBXpXgnUm1afVLtpGf8A05Fy4weIUrwvwr/rj/12SvZPhN/x6an/ANhFf/RKV+6+E9OMeNItf8+5/ofC5HiatWcYyff8mddX1D+zp8nwW0ZugP2kc9/9Ikr5er6S+A//ACRzRvrP/wClMtfVfSD/AOSVw3/X5f8Apuoa8U/7nD/F+jPRfNf7UqmPJAAX3NZfxXiH/Ct/EUh/6AV39f8AVNT7P/j/AJv95f5VT+LP/JONc/7A91/6Jav5Sy//AH6l/ij+aPiYr30fIi9B9Kpa5fHTI7a/Dspj1C3O5Rkj94BV1eg+lY/jr/kBj/r8t/8A0YK/0J4sSfC+PT/581f/AEiR+s15ONKTXRMx/HXjt2aVnvJyDOv8A9K4/wD4Tb/p6m/79il8a9Jf+uy/yrk6/iilQgoHyGNxlZ13c//Z" alt="yangyongyi">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>第三条说的是没有动力自动化，越南，新疆更没动力自动化。</p>
+
+<p>其实说来说去就是内卷化那回事。</p>
+
+<p>从工资占GDP的比例来看，中国就不可能是一个真正意义上的“巨大市场”。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/1818.html">yangyongyi</a>
+                        at 2020-01-17
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">3</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="4"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2950.html">
+                    <img src="data:image/jpeg;base64,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" alt="caonimadashabi">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>@<a href="/member/sorrysorrysorry">sorrysorrysorry</a> #1 拿新疆说事没意义，新疆的人口（不管你算学习班里面的还是外面的）比印度越南少多了，不可能大规模承担制造业转移。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2950.html">caonimadashabi</a>
+                        at 2020-01-18
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">4</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/2531">https://2049bbs.xyz/t/2531</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

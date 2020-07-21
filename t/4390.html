@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>［转］［译］GitHub是如何阻止网络暴力的 - 站务 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/13.html">站务</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>［转］［译］GitHub是如何阻止网络暴力的</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/2592.html">electron8964</a>
+                at 2020-04-16
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/2592.html">
+                <img src="data:image/jpeg;base64,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" alt="electron8964">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <p>原文地址： What GitHub did to kill its trolls</p>
+
+<p>原文作者： Kristen V. Brown</p>
+
+<p>译文出自：掘金翻译计划</p>
+
+<p>译者： wild-flame</p>
+
+<p>校对者：marcmoore, Romoe0906</p>
+
+<p>几年前，创业者熟知的 GitHub 就面临了一个尴尬的现实：GitHub 在变成一个让人厌恶的地方。</p>
+
+<p>GitHub 作为一个为程序员提供分享项目代码并在线合作的网站，2014 年是它发展最快的时候。但是，随着用户数的增多，相应的麻烦也变得越来越多。Julie Ann Horvath，一位在 GitHub 工作的程序员，就因为饱受 性别歧视 的折磨而离开了公司，这个新闻事件也让 GitHub 站在了舆论的风口浪尖上。</p>
+
+<p>更糟糕的是，不多久 GitHub 就发现这不仅仅是他们公司内部的问题。辱骂和歧视在它们的整个网站上都呈现一种蔓延的趋势。整个在线社区都充斥着一种 歧视女性 的氛围，女性并不如男性受重视。小小的不合就会演变成一场评论大战。比方说一个分手的男人，就在他前任女友的每一个项目里都说了一些不堪入目的话语。而那些性别主义、种族主义的喷子们，则利用那些原本为合作提供便利的特性来攻击别人。比方说，利用标签特性，把这个人的主页和用种族主义词汇命名的项目标记起来，就可以将这个人的项目集变成一系列的含糊不清的种族主义词汇。</p>
+
+<p>Nicole Sanchez，公司公关部的副总裁，发言说「这些都是网络自带的危险和隐患」，虽然这是一种普遍现象，但 GitHub 仍在很积极地消除它们。</p>
+
+<p>很让你惊讶对吧？一个给程序员分享代码的网站竟会成为滋生不当言论的乐土。但 GitHub，这个估值两亿的网站，本质上仍然是一个社交网站，它是一个面向程序员的 Facebook + Linkedin 的混合体，所以必然包含了大量的人与人的互动。在互联网上，有人的地方就有谩骂。</p>
+
+<p>为了力挽狂澜，GitHub 雇佣了 Sanchez —— 关于多元化的咨询公司 started Vaya 的创始人。</p>
+
+<p>“为了把全世界所有的程序员连结起来，我们首先需要营造个安全舒适的社区环境。” CEO Chris Wanstrath 说。</p>
+
+<p>开始工作以后，Schaez 从雇佣、绩效考核到公司的装修，重新安排了公司的诸多事务。GitHub 刚成立的时候，是一个不分等级的公司，公司里没有职称，也没有经理。但 Sanchez 废除了这个制度，因为她发现，如果没有管事的，那么人们也不会为他们的错误承担责任。她首先调整公司的内部环境，使其对多元文化更友好，比方说建立一个通畅的官方建议渠道。她还招进了 February Keeney，一个有一半波多黎各血统的变性人，带领新成立的「社区安全组」去消除网站上的不当言论。</p>
+
+<p>鉴于硅谷当时的文化，这是一个很采取的立场。GitHub 和许多技术公司一样，都曾害怕限制用户言论。许多做技术的人都觉得网络应该是一个开放且自由的地方，他们认为，即便是处理那些最恶毒的言论，其实也是损害了用户言论自由的权利。比如 Twitter，它一直拒绝对自己的不当言论问题公开致辞，并自诩是「言论自由的领袖」。</p>
+
+<p>「人们对于『开源』太教条了。」Sanchez 说，「人们总觉得『开源』意味着随时随地并且无条件开放给任何人。」</p>
+
+<p>一些不期望改变的 GitHub 雇员，曾匿名在媒体上抗议说：Sanchez 试图 控制 GitHub 的文化。不过最终，她还是取得了大部分人的支持。</p>
+
+<p>「那些污蔑其实不仅仅是让人不舒服。」Sanchez 说，「它实实在在的在削减我们的用户量。」</p>
+
+<p>2014年，一份 报告 调查了女性离开技术圈的原因，其中，极客文化 —— 当然包括了污蔑、诽谤和骚扰 —— 是她们离开的一个重要原因。用户的多样性曾是 GitHub 成功的重要原因，也正因为此 GitHub 决定要根除网上的各种不当言论。</p>
+
+<p>GitHub 不仅仅是需要在内部执行一份新的行为准则，他需要考虑产品的各个方面，排除其中可能被用户做恶意行为的细节。该死的喷子们！</p>
+
+<p>GitHub 并不是唯一的一个意识到互联网上的丑陋行为不会自行消失的公司。两年前，这些技术公司在面临网络暴力的问题时，还常常以言论自由来为自己辩护，或者不予理会。但 丑闻、批评、网络暴力，使得大家开始重新考虑这个做法。</p>
+
+<p>去年二月，Twitter 的 CEO Dick Costolo 公开承认「我们在处理网络暴力这件事情上做的很差」，这是一次号召。从那时开始，Twitter 以及其他公司开始积极地尝试各种解决办法。九月时，Instagram 发布了一个新功能，允许用户 屏蔽恶意词汇 。今年秋，Google 暗示说它在开始 构建 A.I. 来对抗网络暴力。甚至连最让人不爽的 Reddit，也 封了他最不好的方面。</p>
+
+<p>「现在有这么一种时代浪潮，」GitHub 的首席商务官 Julio Avalos 对我说，「雇主对雇员的期望发生了改变，客户对公司的期望发生了改变。人们会以脚来投票的。」</p>
+
+<p>Twitter 便是忽略这股浪潮的反面教材。作为一个有十多年历史的老公司，Twitter 基本上对网络暴力视而不见，使他成为 喷子 和 憎恶 们 最爱去的地方 。因为网络暴力，一些 大V用户 也离开了 Twitter。这家问题缠身的公司最近几个月疲于寻找买家，有人猜测 Twitter的网络暴力 是一个重要原因。</p>
+
+<p>喷子们已经成了网络时代的祸害。可悲的是，互联网上已经充满了混蛋，真的是应该需要做点什么的时候了。</p>
+
+<p>但是，在现实生活中你都无法避免所有的暴力和辱骂，你要怎么在网络上避免他们呢？拿 Twitter 来举例子吧，他们推行 禁止色情报复，发布 反骚扰条款，成立 信任安全委员会，暂停 有辱骂嫌疑的大V用户的使用权，但仍然没能阻止网络上的暴力。</p>
+
+<p>BuzzFeed 的 Charlie Warzel 今年初在他的一篇文章中 写道：「在Twitter上，辱骂并不仅仅是一个错误（Bug），用硅谷的专业术语来说，它是一个基础特性（Feature）。」</p>
+
+<p>治疗网络暴力并没有什么万能药的。</p>
+
+<p>「网络暴力无休无止。」Nathan Matias，MIT 专门研究减少网络歧视和辱骂的研究员说，「可能的结果非常多，而通过目前掌握的线索来找到我们期望的解决方案就如同大海捞针一般。」</p>
+
+<p>当 GitHub 下决心跟网络暴力一战到底的时候，它也招进了 Ada Ehmke —— 一个变性人，从那时开始，她就成了 GitHub 最重要的批评家。</p>
+
+<p>Ehmke 曾经是 GitHub 设计的受害者之一，她是 Contributor Covenant 的作者，一个许多 GitHub 项目都志愿遵守的准则。但并不是所有在这个基于自由意志而存在的开源社区里的人都欣赏她，甚至有一些人开始攻击她。当时 GitHub 没有任何功能允许用户选择不被标签，所以攻击者们开始将 Ehmke 与种族主义名字相关的项目标记在一起，以污染她的 GitHub 个人主页 —— 那是一份记录了她所有开源项目的页面。这就好像某人在她的简历上画了个纳粹标记，然后再把它交给她未来的雇主。</p>
+
+<p>「这些喷子是很聪明的。他们从各种工具中寻找便利，然后将其作为武器攻击别人。」Ehnke 说，「如果你从来没考虑过你的产品会如何被用来人身攻击，那你的工作是不到位的。」</p>
+
+<p>当去年二月 Ehmke 被雇佣为资深工程师的时候，有一些人就因此对 GitHub 的招聘方向感到很气愤。</p>
+
+<p>@<a href="/member/CoralineAda">CoralineAda</a> @GitHub So you are going to ruin GitHub just like the SJWs are ruining Twitter?</p>
+
+<p>— Jon (@42zarf) February 25, 2016</p>
+
+<p>「所以你也希望像那些圣母毁掉 Twitter 的一样毁掉 GitHub 么？」（译注：SJW 就是 social justice worker）</p>
+
+<p>「我刚开始工作的时候，作为男性，我有很多优势。」Ehmke说，「尽管我一直都知道存在这样的事情，但是直到我变性之后，才开始真正理解那些人。开源社区对于非男性或者非白人一直都很不友好。」</p>
+
+<p>每个同我在 GitHub 谈过话的人都强调说，要解决 GitHub 上的网络暴力，首先是应该要解决公司自己内部的问题。</p>
+
+<p>「如果我们自身一开始就不是多元化的，我们又如何能将这种多元化传递给用户？」Avalos（一个危地马拉人，在 GitHub 还没有老板责任制的时候就加入了公司）对我说，「我们不希望对那些会使用户远离我们产品的事实视而不见。」</p>
+
+<p>社区和安全小组由六个人组成，包括两个变性的人、四个女性，三个为有色人种和两个「有象征意义的男性白人」，换句话说，比起一般的硅谷团队更「多元化」。</p>
+
+<p>他们的工作不仅仅是构建新的「反网络暴力的工具」，也包括诊断各种 GitHub 的功能，预测他们会如何被用来诽谤。</p>
+
+<p>「在 GitHub 里，我们不仅仅是一个工程师团队。」Ehmke 对我说：「我们被认为是关键的基础设施，在 GitHub，这些事情被认为和保持灯光一样重要。」</p>
+
+<p>团队迫使 GitHub 做出的最大的改变就是要求 GitHub 的工程师们在平台中建立「同意和意向」。比如，用户有权利同意被一个用户标注。这可以阻止类似于 Ehmke 的种族主义标签的事件再次发生。所以 GitHub 调整了用户标记功能，需要用户批准。</p>
+
+<p>「我们不打算对产品中疏远人的部分视而不见。」</p>
+
+<p>但主观意图是一个很微妙的事情。在 GitHub 上说一些听起来很冒犯的话并不一定说明那个人是想骂你。「You suck」既可以被当中一个中性的鼓励短语，也可能是朋友之间的一句玩笑而已。</p>
+
+<p>「我们意识到，不当言论其实分为两类。」Keeney 说，「一类就是故意的，而另一类，就像那些开地图炮的玩笑的人一样，根本没有意思到自己的地域歧视。」</p>
+
+<p>GitHub 需要找到更灵活的方法来处理这些行为的细微的差别。</p>
+
+<p>上个月，公司发布了一条 社区指导 的草案。它包括 禁止行为 —— 辱骂，歧视和欺凌 —— 并清楚地阐明了什么构成那些行为。 还有 破坏规则的后果 ，从删除内容到帐户终止不等。</p>
+
+<p>而作为 GitHub，它已要求其社区提供一些反馈。一个用户看了看拟议准则，并建议其将色情也拒之门外，包括一些可能与性教育或生殖健康相关的项目。 最终，GitHub决定，满足社区需求的最佳方式就是请求社区的帮助。</p>
+
+<p>例如，审核评论这个特性，如果被用户和开源项目的管理者所共同管理可能会更好，这样更容易发现一个看上去无礼的笑话是否真的冒犯了别人。</p>
+
+<p>「现在，管理者唯一能做的就是删除评论，举报或者在一个项目中禁止某人。」Keeney 说，「但我们希望确保我们为管理者提供一系列工具来应对问题。不同的问题需要不同的反应。」</p>
+
+<p>最后，Keeney 告诉我，GitHub 计划推出一系列工具，可以让项目管理者做更多的事情，比如禁言一个问题成员仅仅几天的时间。</p>
+
+<p>GitHub的做法有三个核心原则：在功能上让用户不易被骚扰、为用户提供新的保护工具、通过社区来运筹帷幄。</p>
+
+<p>据 GitHub 表示，到目前为止，整个策略已经相当成功了。阻拦和报告的恶意事件数增加了，表明用户实际上正在使用网站的新工具。另一方面，当恶意事件真正发生时，响应用户所需的时间减少了。</p>
+
+<p>「我们赋予用户管理自己体验的权利越多，结果越好。」 其他在线社区也在采取类似的策略。Reddit 上的 r/science 就建立明确的社区规则，并征集了约 1300 人的来维护这些规则，成功的将充满火药味的帖子变成了民主讨论。</p>
+
+<p>「任何合理的治理在线行为的方法都至少要求用户做一些工作来管理社区，」Matias告诉我。 「当社区开展这项工作时，我们通常会获得更多的责任感。」</p>
+
+<p>Instagram 和 Twitter，最近也开始想用户提供更多的处理不当言论的能力。11月，Twitter 发布一一份新特性，允许用户从通知里屏蔽某些单词和短语。</p>
+
+<p>「网络暴力的形式有许多种。」Del Harvey，Twitter 的信任与安全部门的副总裁对我说。「预测哪些言论是让用户感到厌恶是不现实的，我们赋予用户管理自己体验的权利越多，结果越好。」</p>
+
+<p>网络上的不是每一个地方都需要非常干净</p>
+
+<p>「网络上的不同地方，需要不同的社交模式。」乔治亚理工学院的一个研究在线社区的研究员 Amy Bruckman 说，「网络上也应该有一些不那么光鲜的地方，只要他们不跨越那条边界」</p>
+
+<p>换句话说，这都取决于规定是什么。就像真实的世界一样，不同的人会去不同的地方。Reddit 是你家旁边的潜水吧，而 Facebook 是街角的咖啡厅。我们都知道，在4点的酒吧发生的事情，不可能发生在咖啡厅里的。</p>
+
+<p>最后，这些公司做的最大的改变就是，他们愿意失去一些棘手的用户。</p>
+
+<p>发表不同的见解是不同意识之间互相交流的一部分。而对人骂 “bitch” 却不是。 但是，找到他们之间的平衡却很难。在 GitHub 上，新雇佣的雇员和新发布的规定都给社区造成了严重的冲击。并不是每个人都会因此开心，但 GitHub 现在只需要操心在更少的用户上面了。最后，这些公司做的最大的改变就是，他们愿意失去一些有问题的用户。</p>
+
+<p>「如果用户不喜欢我们创造的新文化，可以选择其他的。」Nicole Sanchez 对我说，「对我们来说，我们不介意和你划清界限。」</p>
+
+<p>另转： Newslab Fanclub 电报社群规范条例</p>
+
+<p>本群为新闻实验室的电报交流群。</p>
+
+<p>在这里欢迎大家自由讨论，分享优质信息。请大家互相尊重，以实际行动践行优质信息环境的理念。</p>
+
+<p>本群作为“新闻实验室”项目的交流群，主要讨论以下话题：新闻分享、新闻评论、新闻学习相关。</p>
+
+<p>本群成员较多，避免被打扰或不想参与讨论的朋友可以关注新闻实验室的电报频道：https://t.me/newslab2020 为了确保本群信息交流的质量和信息传播的可靠性及有效性，我们提出以下社区规范：</p>
+
+<p>我们欢迎和提倡：</p>
+
+<p>分享优质信息资源，进行有价值的讨论。发表观点时，请同时提供主张和理由，而不是仅仅表达一种态度和情绪。请参考《明亮的对话》一书；</p>
+
+<p>在发起讨论之前，请尝试自行搜索来解决自己的疑问，他人的时间和你的一样宝贵，更多关于提问的行为指南，请参考《提问的智慧》一书；</p>
+
+<p>发布截图、新闻时，请补充提供信息来源、是否经过核实。如需在讨论中引用媒体或社交网络上的信息，建议附上原始链接而不仅使用截图。</p>
+
+<p>我们不允许出现：</p>
+
+<p>任何不礼貌，不文明的言论，例如发布无意义的色情暴力信息等；</p>
+
+<p>骚扰、人身攻击等恶意行为，例如对特定人士的语言侮辱、「扣帽子」或在当事人拒绝时私信骚扰等；</p>
+
+<p>任何广告和商业推广信息。</p>
+
+<p>如果你认为有群成员的发言符合这些情形，你可以在群里 @<a href="/member/admin">admin</a> 向管理员报告。</p>
+
+<p>我们建议您避免：</p>
+
+<p>讨论网络技术等与新闻传播无关的话题（可自行搜索加入感兴趣的群组进行讨论）；</p>
+
+<p>单纯发送简短而无具体含义的符号或者表情（如？…等），以及其他会影响到他人交流的刷屏行为；</p>
+
+<p>将互联网上的流行用语习惯带入本群。</p>
+
+<p>警告与惩罚：</p>
+
+<p>对于讨论中由于情绪过激影响其他群成员进行正常讨论的情况，管理员会酌情采取禁言的处理；对于带有主观恶意发言，管理员会实施警告并公示原因，警告三次会导致永久禁言；对于广告、机器人、收集群成员个人信息等情况，管理员会将相关成员踢出群并禁止其再次加入。</p>
+
+<p>对于经群成员报告，管理员核查属实，或管理员认为违反上述规定的群成员，管理员会在管理员群内提议进行惩罚，如果得到至少两位其他管理员同意，则会执行相关的惩罚措施，并同时公示惩罚的原因及管理员的 ID。如果管理员认为有必要，可以在具体惩罚措施得到其他管理员同意之前在群内进行口头警告。</p>
+
+<p>如有任何包括被惩罚的群成员在内的群成员对惩罚结果有异议的，可以 @<a href="/member/admin">admin</a> 或直接联系公示的管理员进行申诉并附上原因，管理员会讨论是否撤回处罚，并对讨论结果进行公示，此结果不再接受申诉。</p>
+
+<p>请注意：</p>
+
+<p>任何群成员在群内的发言仅为其个人观点，其他群成员、群主、管理员及新闻实验室均不对其负责。也请各位成员发挥媒介素养和批判性思维，自行判断每一条信息的真伪和质量；</p>
+
+<p>为保证群内交流的质量，管理员对群内发言的频率间隔做了一定限制，并可能根据具体情况调整该限制。</p>
+
+<p>由于本群组相对公开，存在与机器人、广告商，以及恶意的个人信息收集者接触的风险，请注意保护信息安全，考虑调整 Telegram 的隐私设置，谨慎对待群内出现的软件、服务、链接等；</p>
+
+<p>欢迎大家提出建议和意见，营造一个良好的社群环境（私信管理员即可）。</p>
+
+<p>本条例修订于 2020 年 3 月 15 日，历史版本：</p>
+
+<p>一（2020 年 3 月 5 日）</p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/GitHub">GitHub</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/暴力">暴力</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/阻止">阻止</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/网络">网络</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 0 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/4390">https://2049bbs.xyz/t/4390</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>为什么 ipfs node 如此消耗 cpu 和内存 - 问答 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/1.html">问答</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>为什么 ipfs node 如此消耗 cpu 和内存</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/1.html">小二</a>
+                at 2019-10-13
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/1.html">
+                <img src="data:image/jpeg;base64,/9j/2wCEAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgoBAgICAgICBQMDBQoHBgcKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCv/AABEIAEkASQMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APyYuPHtl9pdV8eK2GP/AC9MO/1qSH4gQoQF8cRnPAxfNn+dZU2keC1lfJ0r7xI/eJ6/Wn6fofhia5WewtbKRonDboArbT26dP8A61eG1SSvr+B+jyqVoq+n3s35PEHiF1JGt3YQ+ly+T+vFQpeapj/kJXI9M3D/AONTWek3epW97PbRsY7C0+03TgfcTzEjGfq7qv41fs/BOvah9veOAiLS7aaa+kCHEYjQMw+oLIv1cetY86iYSVWq9dTMW81Q5D6nc/8AgS/+NMku9U/6CdzjHX7S/wDjXb/BH4G+J/jV4p1Pw1oy7W0rwrf65cMBkiG3t/MUfVnaNfo1YWq+A/EWl+F/DviyWwd7PxPFcnTHVf8AWPBOYZEHqQ20/wDAxU/WIc/JfX+v8mJ0JuHNbT/hv80W/hn4w1C1vx4a1XU55LG+baFkuXISQ9O/Q9Prg1J8SdNv/Bc66hL4nlhsJ32xyXN6yhH67CSefUdzg+lcsrvGweIYZTlGHYjkGvXvFHh6z+Jfw2l068tkkN7YpNCHXIWYAMp/76/ma5asvY1oyez3/wAzeg5+zcV02PHx44sfMC/8J5CSTxjVev8A49Vn/hNoP+h4g/8AByv/AMXXm1xZ+GosiSztkYcMu0ZB7iovsHhf/nyg/wC+a9lYOEur/A51jqq2S+9nvmp+E7Q3wmQREBmUq0I6561znibSWs/EQ0yyhQvIsYQIgG5mOAOPc10s+ra/JKd/hiVSJmIH2mL1/wB6svUbu60zx3pHinXtHaG0hvbWSdTMrEpDMrv90nGV4r53DSqKp70k9H1R7uPp03QfImtV0f6n0j+zH+yvb6l8CDrPiG2nabxr4w8HWcvlWskvk6a2oyzXBJRSFBSOHjqcdDXdQfs0HTf2DvjD8Wre2jkuby38SvasoyQsWuRZIx28mwX8GNfSXxf8W6T+xl+xbafEAatcr4f8EaLYSXLeG9Mgub7UJJJ4obYwm4IihjBlEkk7hiq7QoBOa9I+H/hzQ/HPwNbQtW02JtP8UaZcyXojjVVuo79XleXapYKXE5JAJAPQldpPh4jGYv2CxTXuOff+Xpb5I7qGHwft3hU/fjDXTv1v82fOv/BPX9m/T/BHxy+KeoX9mq2q+HfDuiWpYceVc6ZBdT9fqma8x8YfAOSw/wCCd/gzULfwnqMupfDjx9c6u96LA+Q1k+ryQzqHJy42JC/ygj5Otff3hbwho/hOKZtKt1We5itVvZ+hna3t47eNj7+XGo/CvAfiV8Udff8AbY8Nfsda3oeqf8I/418P3V+mrWTQwaZp9usjxm3lia3kN7KWRpZgZrfy0lUody7mxwVfE47GN07XXLJ3dtIqz++7NMZHC4DCr2t7NuKsr6yd191kfm/+1H8EJPgz8R9ftLeNhYR+PNZ0yzJHy+VD9nnhx7GG6j/Kug8Cwy2vhHTradcSR24DA+zGvsP/AILRfBHw9o3wc+HXxEsof9N8VfEK5l1Db0MsunxxFhkA4KWsR55yDnrXgkv7PvivRP2Wbz9rjV9Us4NAstdi0G2tGYme4kKMXmUDgKrhY8HliSRwOfWhjPrODpue70+a0PKnho0cXU5NUlf5HxL8aNA/4R3x7qViIFWKc/aYDt/hkG7/ANC3D8K5DI/vr/3zXsv7WuiG2m0bX4Yd4ktpLWV92Pu4de3ozV4vuj9/zr7TA1fbYSEvL8jw8TanXaSPqHUlCzspPHmNz681B4isrbUtGmt54gwWFipI6cZ/pWdc6b40kd2/4SK1JEh62bHv/vVIdC+INwRbp4osAJfkz/ZrcZ4/v18WqcItS9otPX/I+wlKU048j19P8z9U/wBh7XvE3xM/Yn+HGozXVlO39gfYr8ajb+cJlt5ZIFUg8H5I1BzXuBikgsxFYxQq6KAi7dqdsjjoOuK+UP8Agj38Y/Dvi79mhvg99rSPXPBupXK3NmzAO9pPKZY5lHUqHd4yezKM/eGfrRiAMnAA6mvlcwUqWLqU2rJSb+96fgepg6qq4Km9Nlr187/MRS5U7wB8xwAc8Z4PTris/wAQaZrOpRxpo2spZMrZkl+zq7kcdCQcdPSrVvqWn3Ught7xGZhlVGefpkc1aghknmWCNGZnYKqKMkk9AK44ylCV0dUJOEuZW+av+Z8x/wDBbGUy/s3/AAQhmk3OvxBnDMerBLN8mvmj9tHxtpHgv/gnx8HfgBpN+0ut+NNXvfF+sW+/5oLNJp7eyTHZXkeVx6lGPpX0B/wXW8QeH9A0n4KfCx9dtX1Swv8AUtU1DTEuAZooXhiiSZlHKoXaQKx+9sbGcGvzP1bxj4g+Ivju01rxHq0t1P5lra2zSNxDbRFY4YlA4VEQAAD3PUkn7DKcM6mFpTe0bv11aX+Z8fmGI5a9SMftafLRlr9o901L4Q6XqMn+tS4t35/24XB/UV8+eaP7tes/tCePV16C20LTJU8ryVnZVX5RtluFUfipU15N83qPyNfa5bSnSwqT01bPBxkk62h9VQslyHaBS2JG+6ue9WxdW8ESzbxuikVtpPPUdq5HSvDmhySOEtZAxlIUpcygnngDDV1fgn4JS/EDW7jQ9FiCTQRFrmS81aSJLfDbfmO7Oc8bQCevHFfHThh09ZO3ov8AM+6w1LHYmooUafNJ6JK71+7yuUvh/wCLfFvwa+MT+N/h/wCJp9J1CwvZ3tb20lA+WREbawOVdCDgqwKnHIr7Q+CH/BYO5vtRj8J/HT4L37TeekK+IPCab4pAxAEjwSkbeoJ2OR1+UdK8W0L9krwB4F13TfEUfiOXVr+1ZJrqCzM32XgFdpEx3Snkn7qjp1xXYD4Z+B57iHUrHTvJeKVZI3tZiFDKQR8vTggcEVnWp4LEpe1i3pa+z/Bs+4ynw8zedBzrTVKXM2o6SuvN9O219PM++PDPj7wjrM1w/hqLVbma4m8y4j+yzFUfGMlnPloOOgYDvXBft1/tM/F/9lz9n1fiJ8DfDtifEV/rsOmR6hqduLo6dHJDO7TRRZEZkHlBQX3j5s7eK8avf2k/jZLbmOb4izWykkk2lpb2/J6/cQY/CqvhP4l2Wta3LcfFnUr7X7Qw74V1HzbtI5lPysiOdinBbnH4149HAOlVVSaTS6b3/BHpLw+zGrBxrVYxT/lbcvleNj87PiL41+J/jjx5eePfibr2q6prurStNf6trMrvNct0yWbrjIAA+VQAAAOK5ibVv7IEl7by7JooiYO5Dk8H8Bz+Ar9Q/jD8Fvgb+0vDpFr8RLO40m301ZV0pLXU4bOdmmKZ/dqG+X5RgNjk9Oa8O+J3/BHrwTqsUtz8M/jBqNjMclYNftfPiPsXhKMB/wABP0r6nDZtgtFWXL8rr8D4fN/DDiDDV5ywdqsOl5KMttbp6b+ev4H55XskkxcvIzlU2qWOeAMAVmbZfb8q9O+Nv7I37RHwE+IR+FvxP+C/ibS9ZuIJrnS7ebSp/wDiZW0YJa5tiARNFtG4spO0feweK8o+2x/894/++6+whOFRJxZ+W14zjZzVt193/Dr7z7f/AGXfAD6vO/xH1mxkW2t7lhpUNzAV8yVScykN/Cp4Hq2T/DX198b9E+H/AMOfh98OfBfgDRLe0i/4RFdZ1adI1868vLtgXmlcDLufLIGei4AwBXiXwi/5JpoH/YNi/ma9S+O33PB3/ZPtF/8AZ6+CqzvKVtFc/qnKcjwuWrK1Td3ac2/5pSppXfonZdkctayyRoXkI3ucv7e34dKJEhmbzHiBJ6kEjP1x1qFOv4U+sD9E5USRpBCd0Nuin1CjP5057lzwzVA3Q/Smv1/CgLImaZQenWvbf2Z/HE3j/wAd6D8O9atpp53vUzOoyskEQ8x9/cHahGec5HevCj0/GvZv2Cf+Tk9O/wCwVff+ixSdKFVpSPB4przwnDmLrQ+KNOdvXlZ7X+2H+1Xpnxb+Jth4ZstAWDQfCyzw2mrkRuq6iQEuwr9UjVQkeRjcQxIIwR41/wAIV8I/+hQ8Mf8Agttv/ia8e1vrd/8AYXl/9mrNrKthOeXNGTRGQ5NgssyijhYxTUVvbdvVt76t/wCWyR//2Q==" alt="小二">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/ipfs">ipfs</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/node">node</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/cpu">cpu</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/内存">内存</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 1 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+        <a name="1"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/1253.html">
+                    <img src="data:image/jpeg;base64,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" alt="anquan">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>关键字：区块链、DHT、块交换、哈希。 少一个开销都没这么大，分布式内容看起来是节约带宽，但实际上增加了系统整体负担，单个节点开销也就偏高。 受益的只有单纯接收文件的个体，也就是网关面向的用户，但这些用户实际上并不是 IPFS 的一部分，他们只是用户而已，用户越多开销越大，而且增长幅度远超一般文件服务系统，尤其是有大量低使用率文件的存在。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/1253.html">anquan</a>
+                        at 2019-10-13
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">1</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/1472">https://2049bbs.xyz/t/1472</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>在IPFS上搭建一个去中心化的匿名论坛，可行吗？ - 技术 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/3.html">技术</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>在IPFS上搭建一个去中心化的匿名论坛，可行吗？</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/1528.html">alphabets</a>
+                at 2019-01-18
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/1528.html">
+                <img src="data:image/jpeg;base64,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" alt="alphabets">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <p>在IPFS上的文件，只要有节点同步，就不会丢失数据，不会有关站的风险。 但几个公共IPFS网关都被墙了，让普通用户用命令行不太现实，不知道有没有更好的方法。 用户发布内容会生成一个新的哈希值，如何让其他用户知道这个新的IPFS地址？ 在IPFS上使用数据库也是一个问题，性能远远达不到要求。 或许可以前后端分离？ 想听听大家的观点。</p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/ipfs">ipfs</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/论坛">论坛</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 1 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+        <a name="1"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/1.html">
+                    <img src="data:image/jpeg;base64,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" alt="小二">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>我觉得是一个灾难……数据不可改写、数据完全公开对于论坛来说太可怕了。</p>
+
+<p>论坛从来都不是纯技术问题。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/1.html">小二</a>
+                        at 2019-01-18
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">1</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/912">https://2049bbs.xyz/t/912</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>

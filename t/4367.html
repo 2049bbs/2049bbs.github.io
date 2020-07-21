@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+
+
+
+
+
+
+
+
+
+<head>
+  <title>反脆弱性（antifragile） - 读书 - 2049BBS</title>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link rel="shortcut icon" href=".././static/favicon.ico" type="image/x-icon">
+
+  <link rel="canonical" href="https://2049bbs.github.io" />
+
+  <link href=".././feed.xml" rel="alternate" title="2049BBS - ATOM Feed" type="application/atom+xml">
+
+  <link rel="stylesheet" href=".././static/default/style.css">
+  <link rel="stylesheet" href=".././static/css/jquery.toast.css">
+  <link rel="stylesheet" href=".././static/css/uploadifive.css">
+  <link rel="stylesheet" href=".././static/highligt/sunburst.min.css">
+
+  <script src=".././static/js/jquery.min.js"></script>
+  <script src=".././static/js/jquery.toast.js"></script>
+  <script src=".././static/js/md5.min.js"></script>
+  <script src=".././static/js/jquery.uploadifive.min.js"></script>
+  <script src=".././static/highligt/highlight.pack.js"></script>
+
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(function () {
+      $("#go-to-top").click(function () {
+        $("html, body").animate({ "scrollTop": 0 }, 400);
+        return false;
+      });
+      $(window).scroll(function () {
+        var top = $(document).scrollTop();
+        var g = $("#go-to-top");
+        if (top > 300 && g.is(":hidden")) {
+          g.fadeIn();
+        } else if (top < 300 && g.is(":visible")) {
+          g.fadeOut();
+        }
+      });
+    })
+  </script>
+</head>
+
+
+<body>
+
+    <div class="header-wrap">
+    <div class="header">
+        <div class="logo">
+            <a href=".././index.html" name="top">
+                <img src=".././static/img/logo.png" height="45">
+            </a>
+        </div>
+
+        <div class="scbox">
+            <form role="search" method="get" id="searchform" action="https://github.com/2049bbs/2049bbs.github.io/search" target="_blank">
+                <input type="text" maxlength="30" placeholder="站内搜索" name="q" id="q">
+            </form>
+        </div>
+
+        <div class="c"></div>
+    </div>
+</div>
+
+
+    <div class="main-wrap">
+        <div class="main">
+
+            <div class="main-content">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="nav-title">
+    <div class="float-left fs14">
+        <a href=".././index.html">2049BBS</a> » <a href=".././n/6.html">读书</a>
+    </div>
+
+    <div class="c"></div>
+</div>
+
+<div class="main-box">
+    <div class="topic-title">
+
+        <div class="topic-title-main float-left">
+            <h1>反脆弱性（antifragile）</h1>
+
+            <div class="topic-title-date">
+                By <a href=".././member/2243.html">Merlin</a>
+                at 2020-04-16
+            </div>
+        </div>
+
+        <div class="detail-avatar">
+            <a href=".././member/2243.html">
+                <img src="data:image/jpeg;base64,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" alt="Merlin">
+            </a>
+        </div>
+
+        <div class="c"></div>
+    </div>
+
+    <div class="topic-content">
+        <div class="videowrapper"><iframe src="https://www.youtube.com/embed/OcCGYM2D7BE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+<p>Antifragile （decribed by Taleb）:</p>
+
+<p>社会总会有脆弱性存在。脆弱性包括了带来负面影响的波动性、随机性、混乱和压力、风险和不确定性等等。社会趋势（经济政治或者军事）随着时间流逝必然具有脆弱性。黎凡特繁荣了上万年因为阿拉伯复兴社会党人的green强权上台而迅速衰落并陷入战乱, 罗马这样的千年帝国，却难逃汪达尔人和奥斯曼土耳其的魔掌, 威尼斯这样的千年共和国，也逃拿破仑的龙骑兵践踏。分工过于精细的人类社会也多半会具有脆弱性，疫情即是最好的证明。</p>
+
+<p>反脆弱性（antifragile）的定义是：有些事情能从冲击中受益，当暴露在波动性、随机性、混乱和压力、风险和不确定性下时，它们反而能茁壮成长和壮大。作为个体来讲，有机体往往需要一定的外来的压力刺激（当然不是毁灭性的，而是可控的），才会变得更加强壮。一个社会群体必须把自己打造成近似于一个有机体/复杂系统，而不是无机体/简单系统，并敢于承受一定的压力和刺激，才会变得更强壮和有抵抗力。Taleb观察到：瑞士的各个自治市经常相互撕逼，各种竞争吵闹，这导致其虽然木有强大的中央GOV，却形成了一个类似有机体的复杂系统，得以经历两次世界大战而被保全，且至今经济竞争力仍然稳居世界前列。他还认为，作为一个有机体的社会，必然是灵活的必须要有一些可以脆断的部分来做出牺牲，并让整体社会得到调整。比如，十年一场的康波。</p>
+
+<p>从人类对这些自然随机事件的干预的效果来看，Taleb提出了极端斯坦和平均斯坦的两种模型：</p>
+
+<p><img src="https://imgur.com/6V4rQUp.jpg" alt="" /></p>
+
+<p>两图对比，不言而喻：</p>
+
+<p><img src="https://imgur.com/CXZAO4Z.jpg" alt="" /> <img src="https://imgur.com/pAo1FCD.jpg" alt="" /></p>
+
+<p>因纵轴维度不同，可以自行导入比较一下STDEV。</p>
+
+<p>视频也是一个意思，up and down makes the progress faster.</p>
+
+<p>历史上人类为了平稳控制流程，或者搞过度干扰，容易导致系统从平均斯坦转变为极端斯坦，Taleb给了不少证据，比如，他观察到随着现代国家的建立和发展，极端斯坦似乎越来越不可避免。</p>
+
+<p>比如，在普鲁士德国和意呆利“重新统一”（就好像这些国家在过去的岁月中也曾形成过一个明确的整体，而这些国家后来都发展成了NAZI国家）之前的欧洲。在这些浪漫的实体创建之前，欧洲大陆上的国家如细胞一样分裂繁衍、形态不定，大小城邦混战不止、分分合合。又比如热那亚和威尼斯绝大部分时间都在争夺地中海东部和南部地区，就像两个妓女为抢夺人行道上的地盘撕扯。这样的城邦混战自有其好处：小国很难应付一个以上的敌人，因此战争促使各国忽敌忽友。城邦之间时常出现关系紧张的局面，但是不会酿成重大后果，就像英伦三岛的雨：淅淅沥沥，连绵不断，偶尔发洪水也从未大到不可收拾的地步，远比长期干旱后遭遇强降雨的气候容易应对。换言之，这就是平均斯坦。</p>
+
+<p>然鹅，19世纪后期，中央集中制度就如传染病一样蔓延开来，结果在这些大GOV国家间爆发了两次世界大战及其余波：受害者超过6000万（也可能是8000万）。有无战争之间的区别变得巨大，呈现出显著的割裂。</p>
+
+<p>这与产业界向“赢者通吃”的模式转换并无差异，即少数事件居于主导地位。城邦的集结如同我们早先提到的餐饮业：动荡不定，但你永远不会看到一个大规模的餐饮业危机——这一点与银行业务很不相同。为什么呢？因为它是由大量独立而相互竞争的小单元构成的，这些小单元靠一己之力并不足以危及整个系统，或使其从一个状态进入另一个状态。随机性被分散而不是被集中在一起。</p>
+
+<p>Taleb还给出了最近的证据——20世纪60年代，当随机性被聚集，出现了米苏两强。米苏核战争几乎一触即发时，人类非常接近毁灭性的灾难。</p>
+
+<p>Antifragile是Taleb基于对随机性/遍历性，黑天鹅观察的自然推论。</p>
+
+<p>推崇稳定，维稳正当性，以及反过来期许某种今年/明年/下下年就会发生的天灭核平，只能祝心想事成，永远在各自的幸村者偏差中获得心灵的满足；</p>
+
+<p>对于各种评论家来说，数据驱动型的人容易犯下的错误是无法意识到风险存在于未来，而不是过去，一只火鸡被屠夫喂养了1000天，每天都向其分析师给出数据证实，屠夫对火鸡的爱的“统计置信度与日俱增”;</p>
+
+<p>短暂时间维度下只能观测到variation 而非 trend，越宏大的观测对象，所需要的时间维度或许就越长;</p>
+
+<p>资讯所包含的是99%的noise，去读经过时间检验的东西，去读历史，但不要把重心如真的假的史学家一般放在路径的逻辑上，而要放在遍历性上;</p>
+
+<p>对于个人，留下一个能够活命的生计，去寻求可承担的风险；</p>
+
+<p>差不多就是尼采表达的意思，What doesn’t kill you makes you stronger，当然前提是不能找死，做好风控。</p>
+
+<p>细节/原著参阅：</p>
+
+<p>https://program-think.blogspot.com/2018/12/Book-Review-Antifragile-Things-That-Gain-from-Disorder.html</p>
+
+<p>Fooled by Randomness；The Hidden Role of Chance in Life and in the Markets</p>
+
+<p>Black Swan: the Impact of the Highly Improbable</p>
+
+<p>Antifragile: Things That Gain from Disorder</p>
+
+
+        <p class="mytag float-left">
+            
+            <a href="https://2049bbs.xyz/tag/antifragile">antifragile</a>, 
+            
+            <a href="https://2049bbs.xyz/tag/脆弱性">脆弱性</a>
+            
+        </p>
+
+        <div class="c"></div>
+        <br>
+    </div>
+</div>
+
+<div class="nav-title">
+    共 8 条回复
+</div>
+
+<div class="main-box home-box-list">
+    
+        <a name="1"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/3793.html">
+                    <img src="data:image/jpeg;base64,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" alt="爱狗却养猫">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>非常有意思的文章，谢谢分享。（极端斯坦和平均斯坦的图好像挂了？）</p>
+
+<p>看了以后有几点想法：</p>
+
+<blockquote>
+  <p>历史上人类为了平稳控制流程，或者搞过度干扰，容易导致系统从平均斯坦转变为极端斯坦，Taleb给了不少证据，比如，他观察到随着现代国家的建立和发展，极端斯坦似乎越来越不可避免。</p>
+</blockquote>
+
+<p>我认为政权的“中央集中”与市场的“垄断市场”形成有相似之处。新古典经济学里比较自由竞争、寡头市场和垄断市场，认为其中一个关键的区别因素是边际成本怎样随产量变化。套用到政治理论上，当继续扩大统治的收益大于成本，这种扩张就是相对稳定的。例如，中国中央集权并非“自古以来”即有，也并非一直稳定，经常搞着搞着把自己搞死。秦初废诸侯国搞大兼并，二世而亡；所以汉初吸取教训搞分封郡县双轨制，又用儒家文化降低统治成本；之后有很多时期都是各个地方势力并立，是以有“天下大势，分久必合，合久必分”之感叹。集权能稳定，和客观上社会控制成本的降低有很大关系；无论统治者主观意愿上多么想加强控制、平稳流程，没有这个技术条件就是没有办法；现代国家走向集中化，我认为部分原因也是由于科技的发展使得中央权力扩张成为更有效率的策略，就像反垄断法也无法阻止某些行业的兼并一样。</p>
+
+<blockquote>
+  <p>资讯所包含的是99%的noise，去读经过时间检验的东西，去读历史，但不要把重心如真的假的史学家一般放在路径的逻辑上，而要放在遍历性上。</p>
+</blockquote>
+
+<p>虽然99% noise 理论让我挺深思的（从这个理论可合理推断不学历史就看不懂当今社会），但说实话我没读懂“遍历性”是指什么。如果是探索穷尽所有可能路径，我怀疑“遍历”真有可能做到吗？或许能做到的，永远只是求得一个局部最优解而已。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/3793.html">爱狗却养猫</a>
+                        at 2020-04-16
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">1</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="2"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2243.html">
+                    <img src="data:image/jpeg;base64,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" alt="Merlin">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>@<a href="/member/%E7%88%B1%E7%8B%97%E5%8D%B4%E5%85%BB%E7%8C%AB">爱狗却养猫</a> #1</p>
+
+<p>第一条：我看到的推论恰恰是分权并容忍争端，创造不至于你死我活的争端条件，比如立宪制，更有利于避免极端斯坦，比如朝代更迭。现代国家，产业化过分追求效率和市场导致追求规模效应和集中可能是一个思路，另一个思路是马太效应。</p>
+
+<p>第二条： 遍历性并不是指“探索所有可能路径”，而是正确对待统计样本，或者时刻提醒自己这一点，避免陷入幸存者偏差，忽略偏态分布的存在，比如码农比交易员更赚钱，因为一定考虑到爆仓的那些人~当然，同时也是指时间维度上的遍历，比如赌场的凯利公式，了解一下。</p>
+
+<p>图挂了，编程随想博客有~懒得再上传了。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2243.html">Merlin</a>
+                        at 2020-04-16
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">2</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="3"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2243.html">
+                    <img src="data:image/jpeg;base64,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" alt="Merlin">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>@<a href="/member/%E7%88%B1%E7%8B%97%E5%8D%B4%E5%85%BB%E7%8C%AB">爱狗却养猫</a> #1</p>
+
+<p>当然，作者本身是统计学博士，具体操作上都是用的统计学方法去判断，而不是直觉，或仅仅是阅读。比如monte carlo simulation</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2243.html">Merlin</a>
+                        at 2020-04-16
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">3</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="4"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/3793.html">
+                    <img src="data:image/jpeg;base64,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" alt="爱狗却养猫">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>@<a href="/member/Merlin">Merlin</a> #2</p>
+
+<blockquote>
+  <p>第一条：我看到的推论恰恰是分权并容忍争端，创造不至于你死我活的争端条件。</p>
+</blockquote>
+
+<p>有道理。那你觉得创造分权和容忍争端的环境需要哪些条件呢？</p>
+
+<blockquote>
+  <p>第二条： 遍历性并不是指“探索所有可能路径”，而是正确对待统计样本……同时也是指时间维度上的遍历，比如赌场的凯利公式，了解一下。</p>
+</blockquote>
+
+<p>确认一下是不是正确理解了你说的意思。是说要看长期期望值吗？</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/3793.html">爱狗却养猫</a>
+                        at 2020-04-16
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">4</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="5"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2243.html">
+                    <img src="data:image/jpeg;base64,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" alt="Merlin">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>@<a href="/member/%E7%88%B1%E7%8B%97%E5%8D%B4%E5%85%BB%E7%8C%AB">爱狗却养猫</a> #4</p>
+
+<p>要不，公民社会先？</p>
+
+<p>是，其中一个意思。大部分东西没有办法归纳而不改变原意。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2243.html">Merlin</a>
+                        at 2020-04-17
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">5</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="6"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/3793.html">
+                    <img src="data:image/jpeg;base64,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" alt="爱狗却养猫">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>@<a href="/member/Merlin">Merlin</a> #5 您老说话真简洁。哎，公民社会是没错，可这好像和“分权和容忍争端的环境”是同义词啊。</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/3793.html">爱狗却养猫</a>
+                        at 2020-04-17
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">6</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="7"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/2243.html">
+                    <img src="data:image/jpeg;base64,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" alt="Merlin">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>@<a href="/member/%E7%88%B1%E7%8B%97%E5%8D%B4%E5%85%BB%E7%8C%AB">爱狗却养猫</a> #6</p>
+
+<p>是同义词，有人说是分裂，殖民100年，党内改革，人口素质，经济崩溃，维稳减弱小团体形成，国际形势，政治强人，底层起义，地缘，中产壮大。这些都是对过去的路径的观察，随着控制延续，任何一种出现的概率都在增大，但我不认为某种路径是必然，也就不知道最终破局的条件。为何无法预测？可以参考下我之前发的这篇： https://2049bbs.xyz/t/2223</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/2243.html">Merlin</a>
+                        at 2020-04-17
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">7</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+        <a name="8"></a>
+
+        
+
+        <div class="commont-item">
+            <div class="commont-avatar">
+                <a href=".././member/3793.html">
+                    <img src="data:image/jpeg;base64,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" alt="爱狗却养猫">
+                </a>
+            </div>
+
+            <div class="commont-data">
+
+                <div class="commont-content">
+                    <p>@<a href="/member/Merlin">Merlin</a> #7 感谢。非常有意思的帖子和讨论。</p>
+
+<blockquote>
+  <p>分裂，殖民100年，党内改革，人口素质，经济崩溃，维稳减弱小团体形成，国际形势，政治强人，底层起义，地缘，中产壮大。</p>
+</blockquote>
+
+<p>这可以搞个Rap了：we didn’t start the fire.</p>
+
+                </div>
+
+                <div class="commont-data-date">
+                    <div class="float-left">
+                        <a href=".././member/3793.html">爱狗却养猫</a>
+                        at 2020-04-17
+                    </div>
+
+                    <div class="float-right">
+                        <span class="commonet-count">8</span>
+                    </div>
+
+                    <div class="c"></div>
+                </div>
+
+                <div class="c"></div>
+            </div>
+
+            <div class="c"></div>
+        </div>
+    
+</div>
+
+            </div>
+            
+            <div class="main-sider">
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">关于</div>
+
+        <div class="sider-box-content">
+            <p>2049BBS 的自动更新镜像站，免翻墙访问。</p>
+            <div class="btn">
+                <a href="https://github.com/2049bbs/2049bbs.github.io">Github Repo</a>
+                <a href="https://github.com/2049bbs/2049bbs.github.io/archive/gh-pages.zip">离线浏览</a>
+                <a href="https://2049bbs.github.io/feed.xml">RSS订阅</a>
+                <a href=".././t/1860.html">节点订阅功能帮助</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">源站地址（已被墙）</div>
+
+        <div class="sider-box-content">
+            <p><a href="https://2049bbs.xyz/t/4367">https://2049bbs.xyz/t/4367</a></p>
+            <div class="c"></div>
+        </div>
+
+    </div>
+
+    <div class="sider-box">
+
+        <div class="sider-box-title">节点</div>
+
+        <div class="sider-box-content">
+            <div class="btn">
+                
+                <a href=".././n/1.html">问答</a>
+                
+                <a href=".././n/10.html">人物</a>
+                
+                <a href=".././n/11.html">影视</a>
+                
+                <a href=".././n/12.html">分享创造</a>
+                
+                <a href=".././n/13.html">站务</a>
+                
+                <a href=".././n/14.html">使用指南</a>
+                
+                <a href=".././n/15.html">Geek</a>
+                
+                <a href=".././n/16.html">2049</a>
+                
+                <a href=".././n/17.html">外段</a>
+                
+                <a href=".././n/18.html">梯子</a>
+                
+                <a href=".././n/19.html">树洞</a>
+                
+                <a href=".././n/2.html">时政</a>
+                
+                <a href=".././n/20.html">垃圾场</a>
+                
+                <a href=".././n/21.html">无人区</a>
+                
+                <a href=".././n/3.html">技术</a>
+                
+                <a href=".././n/4.html">水</a>
+                
+                <a href=".././n/5.html">分享发现</a>
+                
+                <a href=".././n/6.html">读书</a>
+                
+                <a href=".././n/7.html">音乐</a>
+                
+                <a href=".././n/8.html">博客</a>
+                
+            </div>
+            <div class="c"></div>
+        </div>
+
+    </div>
+</div>
+
+
+            <div class="c"></div>
+
+        </div>
+        <div class="c"></div>
+    </div>
+
+    <div class="footer-wrap">
+
+    <div class="footer">
+        <p>
+            © Copyright <a href=".././index.html">2049BBS</a> •
+            <a rel="nofollow" href=".././feed.xml">Atom Feed</a>
+        </p>
+
+        <p>
+            Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>
+            and <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </p>
+
+        <p>
+            <a href="https://github.com/2049bbs/2049bbs.github.io/" target="_blank">镜像站计划项目主页</a>
+        </p>
+    </div>
+
+    <a style="display: none;" rel="nofollow" href="#top" id="go-to-top">▲</a>
+
+</div>
+
+
+</body>
+
+</html>
