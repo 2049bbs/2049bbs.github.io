@@ -3,7 +3,9 @@
 
 2049bbs 的站长 Ciao/榴梿/小二 （真名蔡伟） [确认](https://www.scmp.com/news/china/politics/article/3081569/chinese-activists-detained-after-sharing-censored-coronavirus)在 2020年4月19日 [被捕](https://twitter.com/southern_idiot/status/1253970069756850179)。
 
-论坛[很有可能已被共产党接管](https://2049bbs.github.io/t/4544)， **请全程使用Tor访问主站**。
+~~论坛[很有可能已被共产党接管](https://2049bbs.github.io/t/4544)， **请全程使用Tor访问主站**。~~
+
+**论坛已于 2020-07-21T08:36Z 彻底无法访问**。
 
 ![](https://cdn.i-scmp.com/sites/default/files/d8/images/methode/2020/04/25/ec9e9fda-86fa-11ea-8863-2139a14b0dea_image_hires_222451.JPG)
 
