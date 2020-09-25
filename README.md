@@ -5,7 +5,8 @@
 
 ~~论坛[很有可能已被共产党接管](https://2049bbs.github.io/t/4544)， **请全程使用Tor访问主站**。~~
 
-**论坛已于 2020-07-21T08:36Z 彻底无法访问**。
+**2049bbs已于 2020-07-21T08:36Z 彻底无法访问**。  
+继任者 [2047论坛 (2047.name)](https://2047.name/t/7157) 包含从此备份恢复的2049bbs的**所有内容**。
 
 ![](https://cdn.i-scmp.com/sites/default/files/d8/images/methode/2020/04/25/ec9e9fda-86fa-11ea-8863-2139a14b0dea_image_hires_222451.JPG)
 
